@@ -2,7 +2,7 @@
 
 Application de création et de gestion de tournois sportifs et e-sport, développée dans le cadre du cours d'**architecture logicielle** à l'ECE Paris.
 
-Le projet se construit en trois phases : un site web interactif en PHP, puis l'extraction d'une API REST, puis une application cliente (mobile ou web) qui consomme cette API. L'objectif est de montrer qu'une architecture bien découpée permet de faire évoluer l'application sans la réécrire.
+L'application est développée avec **React** et **Vite**. Le projet se construit en trois phases : une application web interactive en React, puis l'extraction d'une API REST, puis le branchement de l'application sur cette API. L'objectif est de montrer qu'une architecture bien découpée permet de faire évoluer l'application sans la réécrire.
 
 ---
 
@@ -116,32 +116,31 @@ Le football et EA Sports FC partagent la même logique de score. La seule diffé
 L'application est découpée en couches, chacune avec une responsabilité unique :
 
 ```
-Présentation (vues PHP, puis client mobile/web)
+Présentation (pages et composants React)
         │
-Contrôleurs (reçoivent les requêtes, renvoient une vue ou du JSON)
+État et orchestration (hooks, contextes : utilisateur connecté, tournoi courant)
         │
 Services (toute la logique métier : classement, validation, calendrier)
         │
-Repositories (accès à la base de données)
+Accès aux données (stockage local en phase 1, appels à l'API REST ensuite)
         │
-Base de données MySQL
+Données
 ```
 
-**Règle d'or** : aucune logique métier dans les contrôleurs ni dans les vues. Tout passe par la couche service. C'est ce qui permet, en phase 2, de remplacer les vues HTML par une API JSON en ne modifiant que les contrôleurs.
+**Règle d'or** : aucune logique métier dans les pages ni dans les composants. Un composant affiche et transmet les actions de l'utilisateur ; tout le reste passe par la couche service. C'est ce qui permet, en phase 3, de brancher l'application sur l'API en ne modifiant que la couche d'accès aux données.
 
 ### Pattern Strategy : gérer plusieurs disciplines
 
-Les règles changent selon la discipline. Plutôt que de multiplier les `if ($discipline == 'foot')` partout dans le code, chaque discipline est représentée par une classe qui implémente une interface commune.
+Les règles changent selon la discipline. Plutôt que de multiplier les `if (discipline === 'foot')` partout dans le code, chaque discipline est représentée par une classe qui respecte un contrat commun. JavaScript n'a pas d'interfaces : le contrat est porté par une classe de base dont chaque règle redéfinit les méthodes.
 
-```php
-interface RegleDiscipline
-{
-    public function modesDisponibles(): array;
-    public function validerEquipe(Equipe $equipe, string $mode): bool;
-    public function validerResultat(Match $match): bool;
-    public function calculerPoints(Match $match, Equipe $equipe): int;
-    public function departager(array $equipes): array;
-    public function statsDisponibles(): array;
+```js
+class RegleDiscipline {
+  modesDisponibles() {}              // → string[]
+  validerEquipe(equipe, mode) {}     // → boolean
+  validerResultat(match) {}          // → boolean
+  calculerPoints(match, equipe) {}   // → number
+  departager(equipes) {}             // → equipes triées
+  statsDisponibles() {}              // → string[]
 }
 ```
 
@@ -158,12 +157,12 @@ Implémentations :
 
 Une `RegleFactory` renvoie la bonne implémentation selon la discipline du tournoi :
 
-```php
-$regle = RegleFactory::pour($tournoi->getDiscipline());
-$points = $regle->calculerPoints($match, $equipe);
+```js
+const regle = RegleFactory.pour(tournoi.discipline);
+const points = regle.calculerPoints(match, equipe);
 ```
 
-Le reste de l'application ne connaît que l'interface `RegleDiscipline`. Ajouter une nouvelle discipline revient à créer une nouvelle classe, sans toucher au code existant (principe ouvert/fermé).
+Le reste de l'application ne connaît que le contrat `RegleDiscipline`. Ajouter une nouvelle discipline revient à créer une nouvelle classe, sans toucher au code existant (principe ouvert/fermé).
 
 ### Tout le monde joue en équipe
 
@@ -204,7 +203,7 @@ Seuls les matchs à l'état `valide` sont pris en compte dans le classement et l
 | id | INT PK | |
 | pseudo | VARCHAR | Unique |
 | email | VARCHAR | Unique |
-| mot_de_passe | VARCHAR | Hashé (`password_hash`) |
+| mot_de_passe | VARCHAR | Hashé côté serveur, jamais stocké en clair |
 | date_creation | DATETIME | |
 
 **tournois**
@@ -332,8 +331,9 @@ Même principe pour les **statistiques globales** : ce sont des agrégats (somme
 
 ## Phases du projet
 
-### Phase 1 : site web PHP (architecture MVC)
+### Phase 1 : application web React (Vite)
 
+- Mise en place du projet React + Vite et de l'architecture en couches
 - Authentification (inscription, connexion, déconnexion)
 - Création et configuration de tournois
 - Inscription aux tournois publics et privés
@@ -344,11 +344,12 @@ Même principe pour les **statistiques globales** : ce sont des agrégats (somme
 
 ### Phase 2 : API REST
 
-- Transformation des contrôleurs pour renvoyer du JSON
+- Extraction de la logique métier (règles, validation, classement) dans une API qui devient la seule autorité
+- Réponses en JSON
 - Routes versionnées (`/api/v1/...`)
 - Authentification par token (JWT)
 - Gestion des erreurs avec codes HTTP et messages cohérents
-- Les couches service et repository ne changent pas
+- Les règles métier et le modèle de données ne changent pas
 
 Exemples de routes :
 
@@ -364,10 +365,11 @@ Exemples de routes :
 | PUT | `/api/v1/matchs/{id}/arbitrage` | Fixer le score d'un match en litige (créateur uniquement) |
 | GET | `/api/v1/tournois/{id}/litiges` | Matchs en litige (créateur uniquement) |
 
-### Phase 3 : application cliente
+### Phase 3 : branchement de l'application sur l'API
 
-- Application mobile ou web (SPA) qui consomme l'API
-- Mêmes fonctionnalités que le site de la phase 1
+- L'application React (SPA) consomme l'API
+- Mêmes fonctionnalités qu'en phase 1 : les pages et les composants ne changent pas
+- Seule la couche d'accès aux données est remplacée par des appels HTTP
 - Aucune logique métier côté client : tout reste dans l'API
 
 ---
@@ -376,25 +378,31 @@ Exemples de routes :
 
 ```
 /
-├── public/
-│   └── index.php              Point d'entrée unique (front controller)
+├── index.html                 Page HTML unique (point d'entrée de Vite)
+├── vite.config.js             Configuration de Vite
+├── package.json               Dépendances et scripts
+├── public/                    Fichiers statiques (favicon, icônes)
 ├── src/
-│   ├── Controller/            Réception des requêtes
-│   ├── Service/               Logique métier
-│   ├── Repository/            Accès aux données
-│   ├── Entity/                User, Tournoi, Equipe, Match...
-│   └── Regle/
-│       ├── RegleDiscipline.php
-│       ├── RegleFactory.php
-│       ├── ScoreParButs.php
-│       ├── RegleFoot.php
-│       ├── RegleBasket.php
-│       ├── RegleValorant.php
-│       └── RegleFifa.php
-├── templates/                 Vues HTML (phase 1)
-├── config/
-├── database/
-│   └── schema.sql
+│   ├── main.jsx               Point d'entrée React
+│   ├── App.jsx                Composant racine
+│   ├── assets/                Images importées dans le code
+│   ├── pages/                 Une page par écran (accueil, tournoi, classement...)
+│   ├── components/            Composants réutilisables (carte de match, badge de statut...)
+│   ├── layouts/               Gabarits communs (en-tête, navigation)
+│   ├── routes/                Définition des routes
+│   ├── context/               État global (utilisateur connecté...)
+│   ├── hooks/                 Hooks personnalisés
+│   ├── services/              Logique métier et accès aux données
+│   │   └── regles/
+│   │       ├── RegleDiscipline.js
+│   │       ├── RegleFactory.js
+│   │       ├── ScoreParButs.js
+│   │       ├── RegleFoot.js
+│   │       ├── RegleBasket.js
+│   │       ├── RegleValorant.js
+│   │       └── RegleFifa.js
+│   ├── utils/                 Fonctions utilitaires
+│   └── styles/                CSS partagé
 └── README.md
 ```
 
@@ -404,25 +412,37 @@ Exemples de routes :
 
 | Élément | Technologie |
 |---|---|
-| Back-end | PHP 8 |
-| Base de données | MySQL |
-| Front phase 1 | HTML / CSS / JavaScript |
-| API phase 2 | PHP (REST, JSON, JWT) |
-| Client phase 3 | *À définir* |
+| Front-end | React 19 (JavaScript, JSX) |
+| Outil de build | Vite 8 |
+| Lint | oxlint |
+| Environnement | Node.js et npm |
+| API phase 2 | REST, JSON, JWT. Technologie *à définir* |
+| Base de données | *À définir* |
 
 ---
 
 ## Installation
 
-*À compléter.*
+Prérequis : [Node.js](https://nodejs.org) (version 20.19 ou plus récente) et npm.
 
 ```bash
-git clone <url-du-repo>
-cd <nom-du-projet>
-# importer database/schema.sql dans MySQL
-# configurer config/ avec les identifiants de la base
-# lancer le serveur : php -S localhost:8000 -t public
+git clone https://github.com/groupe-architecture/Tournois-Manager.git
+cd Tournois-Manager
+npm install      # installe les dépendances (crée node_modules)
+npm run dev      # lance le serveur de développement
 ```
+
+L'application est ensuite accessible sur `http://localhost:5173`.
+
+Autres commandes :
+
+| Commande | Rôle |
+|---|---|
+| `npm run build` | Génère la version de production dans `dist/` |
+| `npm run preview` | Sert en local la version de production |
+| `npm run lint` | Vérifie le code avec oxlint |
+
+Les dossiers `node_modules/` et `dist/` ne sont pas versionnés : ils se régénèrent avec les commandes ci-dessus.
 
 ---
 
