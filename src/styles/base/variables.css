@@ -1,0 +1,37 @@
+:root {
+  /* Couleurs relevées sur les maquettes */
+  --couleur-fond: #100f17;
+  --couleur-carte: #191724;
+  --couleur-champ: #13111c;
+  --couleur-bordure: #2c2a35;
+  --couleur-violet: #7c4dff;
+  --couleur-orange: #ffb43d;
+  --couleur-vert: #45ddb6;
+  --couleur-piste: #2e2a3b;
+  --couleur-bleu: #5aa9ff; /* à vérifier sur la maquette (badge "en attente") */
+  --couleur-gris: #8b8898;
+
+  --couleur-texte: #f2f1f7;
+  --couleur-texte-doux: #a09db0;
+
+  /* Polices */
+  --police-titre: 'Chakra Petch', sans-serif;
+  --police-texte: 'IBM Plex Sans', sans-serif;
+
+  /* Espacements */
+  --espace-1: 4px;
+  --espace-2: 8px;
+  --espace-3: 12px;
+  --espace-4: 16px;
+  --espace-5: 24px;
+  --espace-6: 32px;
+  --espace-7: 48px;
+  --espace-8: 64px;
+
+  /* Arrondis */
+  --rayon-carte: 18px;
+  --rayon-champ: 10px;
+  --rayon-pastille: 999px;
+
+  --largeur-max: 1200px;
+}

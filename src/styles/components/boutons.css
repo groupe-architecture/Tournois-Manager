@@ -1,0 +1,19 @@
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-2);
+  padding: 10px 20px;
+  border-radius: var(--rayon-champ);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  transition: opacity 0.15s, transform 0.15s;
+}
+.bouton:hover { opacity: 0.88; }
+.bouton:active { transform: scale(0.98); }
+
+.bouton--principal { background: var(--couleur-violet); color: #fff; }
+.bouton--secondaire { background: transparent; border-color: var(--couleur-bordure); color: var(--couleur-texte); }
+.bouton--orange { background: var(--couleur-orange); color: #1a1200; }
+.bouton--large { width: 100%; }
