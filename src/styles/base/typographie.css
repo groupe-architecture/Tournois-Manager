@@ -1,0 +1,20 @@
+h1, h2, h3, h4 {
+  font-family: var(--police-titre);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+h2 { font-size: 1.6rem; }
+h3 { font-size: 1.15rem; }
+
+.surtitre {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--couleur-violet);
+}
+
+.texte-doux { color: var(--couleur-texte-doux); font-size: 0.9rem; }
+.accent { color: var(--couleur-violet); }

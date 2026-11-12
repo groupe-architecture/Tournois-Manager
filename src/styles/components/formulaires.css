@@ -1,0 +1,11 @@
+.champ { display: flex; flex-direction: column; gap: var(--espace-2); margin-bottom: var(--espace-4); }
+.champ label { font-size: 0.8rem; color: var(--couleur-texte-doux); }
+.champ input {
+  background: var(--couleur-champ);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-champ);
+  padding: 12px 14px;
+  outline: none;
+}
+.champ input:focus { border-color: var(--couleur-violet); }
+.champ input::placeholder { color: #55526a; }

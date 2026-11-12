@@ -1,0 +1,20 @@
+.pastille {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-pastille);
+  font-size: 0.75rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: var(--rayon-pastille);
+  border: 1px solid;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.badge--valide { color: var(--couleur-vert); border-color: var(--couleur-vert); }
+.badge--attente { color: var(--couleur-bleu); border-color: var(--couleur-bleu); }
+.badge--litige { color: var(--couleur-orange); border-color: var(--couleur-orange); }
+.badge--ajouer { color: var(--couleur-gris); border-color: var(--couleur-gris); }

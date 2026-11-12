@@ -1,0 +1,3 @@
+.message { padding: 10px 14px; border-radius: var(--rayon-champ); border: 1px solid; font-size: 0.85rem; margin-bottom: var(--espace-4); }
+.message--succes { color: var(--couleur-vert); border-color: var(--couleur-vert); }
+.message--erreur { color: var(--couleur-orange); border-color: var(--couleur-orange); }

@@ -1,0 +1,25 @@
+.avatar--grand { width: 64px; height: 64px; font-size: 1.4rem; }
+
+.profil__entete { display: flex; align-items: center; gap: var(--espace-5); flex-wrap: wrap; }
+.profil__identite { flex: 1; }
+.profil__identite h1 { font-size: 2rem; }
+.profil__stats { display: flex; gap: var(--espace-3); }
+.profil__stat {
+  background: var(--couleur-champ); border-radius: 12px;
+  padding: var(--espace-3) var(--espace-5);
+  display: flex; flex-direction: column;
+}
+.profil__stat strong { font-family: var(--police-titre); font-size: 1.4rem; }
+.profil__stat span { font-size: 0.7rem; color: var(--couleur-texte-doux); }
+
+.profil__liste { display: flex; flex-direction: column; gap: var(--espace-3); }
+.profil__colonnes { display: grid; grid-template-columns: 1fr 1fr; gap: var(--espace-6); }
+
+.tache { display: flex; justify-content: space-between; align-items: center; gap: var(--espace-4); padding: var(--espace-4) var(--espace-5); }
+.tache__surtitre--orange { color: var(--couleur-orange); }
+.tache__surtitre--bleue { color: var(--couleur-bleu); }
+
+.carte-tournoi { padding: var(--espace-4) var(--espace-5); }
+.carte-tournoi__haut { display: flex; justify-content: space-between; margin-bottom: var(--espace-2); font-size: 0.7rem; }
+
+@media (max-width: 800px) { .profil__colonnes { grid-template-columns: 1fr; } }
