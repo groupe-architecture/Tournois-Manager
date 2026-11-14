@@ -11,6 +11,35 @@
   font-size: 1.05rem;
 }
 
+/* Boutons de filtre par discipline */
+.filtres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+  margin-bottom: var(--espace-5);
+}
+
+.filtre {
+  padding: 9px 20px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-pastille);
+  background: var(--couleur-carte);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: border-color 0.15s;
+}
+
+.filtre:hover {
+  border-color: var(--couleur-violet);
+}
+
+.filtre--actif {
+  background: var(--couleur-violet);
+  border-color: var(--couleur-violet);
+  color: #fff;
+  font-weight: 700;
+}
+
 .liste-tournois__grille {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
