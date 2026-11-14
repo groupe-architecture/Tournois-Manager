@@ -66,3 +66,200 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* --- Rejoindre un tournoi (figure 5) --- */
+
+.rejoindre__retour {
+  display: inline-block;
+  margin: var(--espace-3) 0 var(--espace-3);
+  color: var(--couleur-texte-doux);
+  font-size: 0.9rem;
+}
+
+.rejoindre__retour:hover {
+  color: var(--couleur-texte);
+}
+
+.rejoindre__titre {
+  margin-top: var(--espace-2);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+}
+
+.rejoindre__intro {
+  max-width: 760px;
+  margin: var(--espace-3) 0 var(--espace-6);
+  font-size: 1.05rem;
+}
+
+.rejoindre__colonnes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espace-5);
+}
+
+/* Les deux options : la carte de l'option choisie a une bordure violette. */
+.choix {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 28px;
+  border-width: 2px;
+}
+
+.choix--actif {
+  border-color: var(--couleur-violet);
+}
+
+.choix h2 {
+  font-size: 1.45rem;
+  margin-bottom: var(--espace-2);
+}
+
+.choix > .texte-doux {
+  margin-bottom: var(--espace-4);
+}
+
+.choix .champ {
+  width: 100%;
+  margin-bottom: var(--espace-3);
+}
+
+.choix .champ input {
+  padding: 16px 18px;
+  font-size: 1.05rem;
+}
+
+.choix__note {
+  font-size: 0.85rem;
+}
+
+.choix .bouton--secondaire {
+  border-color: var(--couleur-violet);
+  padding: 12px 20px;
+}
+
+.choix__encart {
+  width: 100%;
+  margin-top: auto;
+  padding: var(--espace-4);
+  border-radius: 12px;
+  background: var(--couleur-champ);
+  color: var(--couleur-texte-doux);
+  font-size: 0.85rem;
+}
+
+/* Liste des équipes déjà inscrites */
+.equipes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-2);
+  width: 100%;
+  margin-bottom: var(--espace-4);
+}
+
+.equipe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espace-3);
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 12px;
+  background: var(--couleur-champ);
+  text-align: left;
+  transition: border-color 0.15s;
+}
+
+.equipe strong,
+.equipe small {
+  display: block;
+}
+
+.equipe small {
+  color: var(--couleur-texte-doux);
+  font-size: 0.78rem;
+}
+
+.equipe__places {
+  flex-shrink: 0;
+  color: var(--couleur-vert);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.equipe:hover:not(:disabled),
+.equipe--choisie {
+  border-color: var(--couleur-violet);
+}
+
+/* Équipe complète : grisée et non cliquable */
+.equipe:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.equipe:disabled .equipe__places {
+  color: var(--couleur-texte-doux);
+}
+
+/* Bandeau du bas : récapitulatif et confirmation */
+.recap-inscription {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-6);
+  margin-top: var(--espace-5);
+  padding: 28px;
+}
+
+.recap-inscription .texte-doux {
+  display: block;
+  margin-bottom: var(--espace-1);
+}
+
+.recap-inscription__valeur {
+  font-family: var(--police-titre);
+  font-size: 1.2rem;
+}
+
+.recap-inscription__valeur--role {
+  color: var(--couleur-violet);
+}
+
+.recap-inscription__implication {
+  flex: 1;
+  max-width: 380px;
+  font-size: 0.95rem;
+}
+
+.recap-inscription .bouton {
+  margin-left: auto;
+  padding: 16px 28px;
+  font-size: 0.95rem;
+}
+
+.recap-inscription .bouton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rejoindre__confirmation {
+  margin-top: var(--espace-4);
+}
+
+@media (max-width: 900px) {
+  .rejoindre__colonnes {
+    grid-template-columns: 1fr;
+  }
+
+  .recap-inscription {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espace-4);
+  }
+
+  .recap-inscription .bouton {
+    margin-left: 0;
+    width: 100%;
+  }
+}
