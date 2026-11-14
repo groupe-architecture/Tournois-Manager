@@ -1,0 +1,18 @@
+@import './base/variables.css';
+@import './base/reset.css';
+@import './base/typographie.css';
+
+@import './components/boutons.css';
+@import './components/cartes.css';
+@import './components/formulaires.css';
+@import './components/pastilles.css';
+@import './components/layout.css';
+@import './components/message.css';
+
+@import './pages/accueil.css';
+@import './pages/profil.css';
+@import './pages/erreurs.css';
+
+/* Tournois (Élève 2) */
+@import './components/carte-tournoi.css';
+@import './pages/tournoi.css';

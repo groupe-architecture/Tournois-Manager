@@ -1,0 +1,8 @@
+.carte {
+  background: var(--couleur-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-carte);
+  padding: var(--espace-5);
+}
+.carte--orange { border-color: var(--couleur-orange); }
+.carte--bleue { border-color: var(--couleur-bleu); }

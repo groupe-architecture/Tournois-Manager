@@ -1,0 +1,35 @@
+.hero {
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--espace-7);
+  align-items: center; padding: var(--espace-6) 0;
+}
+.hero h1 { margin: var(--espace-3) 0 var(--espace-4); }
+.hero__texte { max-width: 480px; margin-bottom: var(--espace-5); }
+.hero__boutons { display: flex; gap: var(--espace-3); flex-wrap: wrap; }
+
+.auth__onglets {
+  display: grid; grid-template-columns: 1fr 1fr;
+  background: var(--couleur-champ); border-radius: var(--rayon-champ);
+  padding: 4px; margin-bottom: var(--espace-5);
+}
+.auth__onglet { background: none; border: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; color: var(--couleur-texte-doux); }
+.auth__onglet.actif { background: var(--couleur-violet); color: #fff; }
+.auth__bas { text-align: center; margin-top: var(--espace-4); font-size: 0.75rem; }
+
+.section { margin-top: var(--espace-8); }
+.section h2 { margin-bottom: var(--espace-5); }
+
+.grille-disciplines { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--espace-4); }
+.grille-disciplines .carte { padding: var(--espace-4); }
+.grille-disciplines h3 { margin: var(--espace-2) 0; }
+
+.grille-etapes { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--espace-5); }
+.etape { border-top: 2px solid; padding-top: var(--espace-3); }
+.etape h3 { margin-bottom: var(--espace-2); }
+.etape--violet { border-color: var(--couleur-violet); }
+.etape--bleu { border-color: var(--couleur-bleu); }
+.etape--orange { border-color: var(--couleur-orange); }
+
+@media (max-width: 900px) {
+  .hero, .grille-etapes { grid-template-columns: 1fr; }
+  .grille-disciplines { grid-template-columns: repeat(2, 1fr); }
+}
