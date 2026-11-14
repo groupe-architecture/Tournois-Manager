@@ -412,3 +412,255 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* --- Page d'un tournoi : en-tête (figures 10, 13, 16, 18) --- */
+
+.entete-tournoi {
+  margin: var(--espace-5) 0 var(--espace-5);
+}
+
+.entete-tournoi__haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--espace-5);
+  flex-wrap: wrap;
+}
+
+.entete-tournoi__nom {
+  margin: var(--espace-2) 0 var(--espace-3);
+}
+
+.entete-tournoi__infos {
+  font-size: 1.05rem;
+}
+
+.entete-tournoi .bouton--secondaire {
+  padding: 14px 22px;
+  background: var(--couleur-carte);
+}
+
+/* Pastille « Ton équipe : … » affichée à un membre du tournoi */
+.entete-tournoi__equipe {
+  padding: 12px 20px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-pastille);
+  background: var(--couleur-carte);
+  font-size: 0.9rem;
+}
+
+.entete-tournoi__pastilles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+  margin-top: var(--espace-5);
+}
+
+.entete-tournoi__pastilles .pastille {
+  padding: 8px 14px;
+  background: var(--couleur-carte);
+  font-size: 0.85rem;
+}
+
+/* --- Page d'un tournoi : mise en page et emplacements des coéquipiers --- */
+
+.detail-tournoi__colonnes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--espace-6);
+  align-items: start;
+  margin-top: var(--espace-5);
+}
+
+.detail-tournoi__principal,
+.detail-tournoi__lateral {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-5);
+}
+
+/* Zone en pointillés : repère provisoire, à retirer quand le vrai bloc est branché. */
+.emplacement {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-1);
+  padding: var(--espace-5);
+  border: 1px dashed var(--couleur-bordure);
+  border-radius: var(--rayon-carte);
+  color: var(--couleur-texte-doux);
+  font-size: 0.9rem;
+}
+
+.emplacement strong {
+  color: var(--couleur-texte);
+}
+
+@media (max-width: 1000px) {
+  .detail-tournoi__colonnes {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Configuration d'un tournoi (figures 7 et 8) --- */
+
+.config__titre {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-4);
+  flex-wrap: wrap;
+  margin-top: var(--espace-2);
+}
+
+.config__titre h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+}
+
+.config__titre .badge {
+  padding: 6px 16px;
+  font-size: 0.85rem;
+}
+
+.config__intro {
+  margin: var(--espace-3) 0 var(--espace-5);
+  font-size: 1.05rem;
+}
+
+.config__bandeau {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  padding: var(--espace-4) var(--espace-5);
+  margin-bottom: var(--espace-6);
+}
+
+.config__bandeau svg {
+  flex-shrink: 0;
+  color: var(--couleur-violet);
+}
+
+.config__colonnes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: var(--espace-6);
+  align-items: start;
+}
+
+.config__formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-5);
+}
+
+.config__formulaire .champ {
+  margin-bottom: 0;
+}
+
+.config__formulaire .champ label {
+  font-size: 0.9rem;
+}
+
+.config__formulaire .champ input {
+  padding: 16px 20px;
+  font-size: 1.05rem;
+  background: var(--couleur-carte);
+}
+
+.config__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+  margin-top: var(--espace-3);
+}
+
+.config__actions .bouton {
+  padding: 16px 26px;
+  font-size: 0.95rem;
+}
+
+.config__formulaire .message {
+  margin-bottom: 0;
+}
+
+/* Champ verrouillé d'un tournoi lancé (figure 8) */
+.champ-verrouille__tete {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espace-3);
+  margin-bottom: var(--espace-3);
+  color: var(--couleur-texte-doux);
+  font-size: 0.9rem;
+}
+
+.champ-verrouille__valeur {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border: 1px dashed var(--couleur-bordure);
+  border-radius: var(--rayon-champ);
+  color: var(--couleur-texte-doux);
+  font-size: 1.05rem;
+}
+
+/* Colonne de droite */
+.config__lateral {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-5);
+}
+
+.config__lateral .carte {
+  padding: 28px;
+}
+
+.config__lateral h2 {
+  font-size: 1.4rem;
+}
+
+.config__carte-tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--espace-2);
+}
+
+.config__equipes li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espace-3);
+  padding: 14px 0;
+  border-top: 1px solid var(--couleur-bordure);
+}
+
+.config__equipes li:last-child {
+  padding-bottom: 0;
+}
+
+.config__equipes span {
+  color: var(--couleur-texte-doux);
+  font-size: 0.85rem;
+}
+
+.config__texte-carte {
+  margin: var(--espace-3) 0 var(--espace-4);
+}
+
+.config__texte-carte:last-child {
+  margin-bottom: 0;
+}
+
+.config__lancer,
+.config__lancer .bouton--secondaire {
+  border-color: var(--couleur-violet);
+}
+
+.config__lancer .bouton {
+  padding: 14px 20px;
+}
+
+@media (max-width: 1000px) {
+  .config__colonnes {
+    grid-template-columns: 1fr;
+  }
+}

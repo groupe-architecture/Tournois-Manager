@@ -1,0 +1,37 @@
+/* Code d'accès d'un tournoi privé et son bouton « Copier ». */
+
+.copier-code {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-champ);
+  background: var(--couleur-champ);
+  overflow: hidden;
+}
+
+.copier-code__valeur {
+  padding: 12px 18px;
+  font-family: var(--police-texte);
+  font-size: 1.25rem;
+  letter-spacing: 0.3em;
+}
+
+.copier-code__bouton {
+  min-width: 150px;
+  padding: 0 18px;
+  border: none;
+  border-left: 1px solid var(--couleur-bordure);
+  background: var(--couleur-carte);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: color 0.15s;
+}
+
+.copier-code__bouton:hover {
+  color: var(--couleur-violet);
+}
+
+.copier-code__bouton--copie,
+.copier-code__bouton--copie:hover {
+  color: var(--couleur-vert);
+}

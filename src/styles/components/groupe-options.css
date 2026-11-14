@@ -73,3 +73,38 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Texte d'aide sous un groupe */
+.groupe-options__aide {
+  margin-top: var(--espace-3);
+  font-size: 0.85rem;
+}
+
+/* Option en petit bouton rectangulaire (page de configuration, figure 7) */
+.groupe-options__liste--boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+}
+
+.option-bouton {
+  padding: 12px 20px;
+  border: 2px solid var(--couleur-bordure);
+  border-radius: var(--rayon-champ);
+  background: var(--couleur-carte);
+  transition: border-color 0.15s;
+}
+
+.option-bouton:hover:not(:disabled) {
+  border-color: var(--couleur-violet);
+}
+
+.option-bouton--choisie {
+  border-color: var(--couleur-violet);
+  background: #1c1530;
+}
+
+.option-bouton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
