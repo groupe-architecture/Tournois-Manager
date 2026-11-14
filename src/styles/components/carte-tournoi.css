@@ -1,0 +1,67 @@
+/* Carte d'un tournoi dans la liste (figure 4).
+   Le préfixe "tournoi-carte" évite de se mélanger avec ".carte-tournoi" du profil. */
+
+.tournoi-carte {
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+}
+
+.tournoi-carte__haut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espace-3);
+  margin-bottom: var(--espace-3);
+}
+
+.tournoi-carte__etat {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--couleur-texte-doux);
+}
+
+.tournoi-carte__nom {
+  font-size: 1.7rem;
+  margin-bottom: var(--espace-2);
+}
+
+.tournoi-carte__places {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--espace-5);
+  font-size: 0.95rem;
+}
+
+.tournoi-carte__piste {
+  height: 5px;
+  margin: var(--espace-3) 0 var(--espace-5);
+  border-radius: var(--rayon-pastille);
+  background: var(--couleur-piste);
+  overflow: hidden;
+}
+
+.tournoi-carte__remplissage {
+  height: 100%;
+  border-radius: var(--rayon-pastille);
+  background: var(--couleur-violet);
+}
+
+.tournoi-carte .bouton {
+  padding: 14px 20px;
+  font-size: 0.95rem;
+}
+
+/* Le bouton "Gérer le tournoi" a une bordure violette sur la maquette. */
+.tournoi-carte .bouton--secondaire {
+  border-color: var(--couleur-violet);
+}
+
+/* Tournoi complet : l'état et la barre passent en orange. */
+.tournoi-carte--complet .tournoi-carte__etat {
+  color: var(--couleur-orange);
+}
+
+.tournoi-carte--complet .tournoi-carte__remplissage {
+  background: var(--couleur-orange);
+}

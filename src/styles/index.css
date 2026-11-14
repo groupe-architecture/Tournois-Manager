@@ -12,3 +12,7 @@
 @import './pages/accueil.css';
 @import './pages/profil.css';
 @import './pages/erreurs.css';
+
+/* Tournois (Élève 2) */
+@import './components/carte-tournoi.css';
+@import './pages/tournoi.css';
