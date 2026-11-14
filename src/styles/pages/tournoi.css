@@ -263,3 +263,152 @@
     width: 100%;
   }
 }
+
+/* --- Créer un tournoi (figure 6) --- */
+
+.creer__titre {
+  margin-top: var(--espace-5);
+}
+
+.creer__intro {
+  margin: var(--espace-3) 0 var(--espace-6);
+  font-size: 1.05rem;
+}
+
+.creer__colonnes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: var(--espace-7);
+  align-items: start;
+}
+
+.creer__formulaire {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-5);
+}
+
+.creer__formulaire .champ {
+  margin-bottom: 0;
+}
+
+.creer__formulaire .champ label {
+  font-size: 0.9rem;
+}
+
+.creer__formulaire .champ input {
+  padding: 16px 20px;
+  font-size: 1.05rem;
+  background: var(--couleur-carte);
+}
+
+.creer__nombres {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espace-5);
+  align-items: start;
+}
+
+.creer__aide {
+  margin-top: var(--espace-3);
+  font-size: 0.85rem;
+}
+
+.creer__erreur {
+  margin-top: var(--espace-2);
+  color: var(--couleur-orange);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Récapitulatif à droite : il reste visible quand on fait défiler le formulaire. */
+.recap-tournoi {
+  position: sticky;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+  padding: var(--espace-6);
+}
+
+.recap-tournoi h2 {
+  margin-bottom: var(--espace-4);
+}
+
+.recap-tournoi__lignes > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espace-4);
+  padding: 7px 0;
+}
+
+.recap-tournoi__lignes dt {
+  color: var(--couleur-texte-doux);
+}
+
+.recap-tournoi__lignes dd {
+  font-weight: 700;
+  text-align: right;
+}
+
+.recap-tournoi__regles {
+  margin-top: var(--espace-4);
+  padding: var(--espace-5) 0 var(--espace-4);
+  border-top: 1px solid var(--couleur-bordure);
+}
+
+.recap-tournoi__regles li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-3);
+  margin-top: var(--espace-2);
+  font-size: 0.95rem;
+}
+
+.recap-tournoi__regles svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--couleur-violet);
+}
+
+.recap-tournoi__note {
+  padding-top: var(--espace-4);
+  border-top: 1px solid var(--couleur-bordure);
+  font-size: 0.85rem;
+}
+
+.recap-tournoi .bouton {
+  margin-top: var(--espace-5);
+  padding: 16px 20px;
+  font-size: 1rem;
+}
+
+.recap-tournoi__annuler {
+  margin-top: var(--espace-4);
+  color: var(--couleur-texte-doux);
+  text-align: center;
+}
+
+.recap-tournoi__annuler:hover {
+  color: var(--couleur-texte);
+}
+
+.recap-tournoi .message {
+  margin: var(--espace-4) 0 0;
+}
+
+@media (max-width: 1000px) {
+  .creer__colonnes {
+    grid-template-columns: 1fr;
+    gap: var(--espace-6);
+  }
+
+  .recap-tournoi {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .creer__nombres {
+    grid-template-columns: 1fr;
+  }
+}
