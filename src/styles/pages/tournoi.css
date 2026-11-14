@@ -1,0 +1,24 @@
+/* Pages tournoi (figures 4, 5, 6). */
+
+/* --- Liste des tournois (figure 4) --- */
+
+.liste-tournois__titre {
+  margin-top: var(--espace-5);
+}
+
+.liste-tournois__intro {
+  margin: var(--espace-3) 0 var(--espace-6);
+  font-size: 1.05rem;
+}
+
+.liste-tournois__grille {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espace-5);
+}
+
+@media (max-width: 700px) {
+  .liste-tournois__grille {
+    grid-template-columns: 1fr;
+  }
+}
