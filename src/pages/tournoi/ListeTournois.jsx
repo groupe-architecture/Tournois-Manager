@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import CarteTournoi from '../../components/tournoi/CarteTournoi'
+import PanneauCodePrive from '../../components/tournoi/PanneauCodePrive'
 
 // Valeurs d'exemple en dur (celles de la figure 4).
 // Elles seront remplacées par les données de l'API.
@@ -29,29 +30,36 @@ function ListeTournois() {
         Rejoins un tournoi public en un clic, ou saisis un code d'accès pour un tournoi privé.
       </p>
 
-      <div className="filtres" role="group" aria-label="Filtrer par discipline">
-        {filtres.map((filtre) => (
-          <button
-            key={filtre}
-            type="button"
-            className={`filtre ${filtre === filtreActif ? 'filtre--actif' : ''}`}
-            aria-pressed={filtre === filtreActif}
-            onClick={() => setFiltreActif(filtre)}
-          >
-            {filtre}
-          </button>
-        ))}
-      </div>
+      {/* Deux colonnes : les tournois à gauche, le panneau du code privé à droite. */}
+      <div className="liste-tournois__colonnes">
+        <section>
+          <div className="filtres" role="group" aria-label="Filtrer par discipline">
+            {filtres.map((filtre) => (
+              <button
+                key={filtre}
+                type="button"
+                className={`filtre ${filtre === filtreActif ? 'filtre--actif' : ''}`}
+                aria-pressed={filtre === filtreActif}
+                onClick={() => setFiltreActif(filtre)}
+              >
+                {filtre}
+              </button>
+            ))}
+          </div>
 
-      {tournoisAffiches.length > 0 ? (
-        <div className="liste-tournois__grille">
-          {tournoisAffiches.map((tournoi) => (
-            <CarteTournoi key={tournoi.id} tournoi={tournoi} />
-          ))}
-        </div>
-      ) : (
-        <p className="texte-doux">Aucun tournoi ouvert dans cette discipline pour le moment.</p>
-      )}
+          {tournoisAffiches.length > 0 ? (
+            <div className="liste-tournois__grille">
+              {tournoisAffiches.map((tournoi) => (
+                <CarteTournoi key={tournoi.id} tournoi={tournoi} />
+              ))}
+            </div>
+          ) : (
+            <p className="texte-doux">Aucun tournoi ouvert dans cette discipline pour le moment.</p>
+          )}
+        </section>
+
+        <PanneauCodePrive />
+      </div>
     </>
   )
 }

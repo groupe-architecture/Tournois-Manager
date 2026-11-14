@@ -15,4 +15,5 @@
 
 /* Tournois (Élève 2) */
 @import './components/carte-tournoi.css';
+@import './components/panneau-code.css';
 @import './pages/tournoi.css';

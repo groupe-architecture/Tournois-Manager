@@ -11,6 +11,14 @@
   font-size: 1.05rem;
 }
 
+/* Deux colonnes : la liste à gauche, le panneau du code privé à droite */
+.liste-tournois__colonnes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: var(--espace-6);
+  align-items: start;
+}
+
 /* Boutons de filtre par discipline */
 .filtres {
   display: flex;
@@ -44,6 +52,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--espace-5);
+}
+
+/* Écran moyen : le panneau passe sous la liste */
+@media (max-width: 1000px) {
+  .liste-tournois__colonnes {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 700px) {

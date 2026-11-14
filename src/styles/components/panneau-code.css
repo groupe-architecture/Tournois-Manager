@@ -1,0 +1,55 @@
+/* Panneau « Tournoi privé » (figure 4). */
+
+.panneau-code {
+  padding: var(--espace-6);
+}
+
+.panneau-code h2 {
+  margin-bottom: var(--espace-4);
+}
+
+.panneau-code > .texte-doux {
+  margin-bottom: var(--espace-5);
+}
+
+/* Le champ du code : grandes lettres espacées, comme sur la maquette. */
+.panneau-code .champ input {
+  padding: 14px 18px;
+  font-size: 1.35rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.panneau-code .champ input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.panneau-code__champ--erreur .champ input,
+.panneau-code__champ--erreur .champ input:focus {
+  border-color: var(--couleur-orange);
+}
+
+.panneau-code__erreur {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-2);
+  margin-bottom: var(--espace-4);
+  color: var(--couleur-orange);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.panneau-code__erreur svg {
+  flex-shrink: 0;
+}
+
+.panneau-code .bouton {
+  padding: 14px 20px;
+  font-size: 0.95rem;
+}
+
+.panneau-code .bouton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
