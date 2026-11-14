@@ -7,7 +7,7 @@ function MenuCompte({pseudo , email}) {
 
     return (
         <div className="menu-wrapper">
-            <button className="menu-compte__button" onClick={ () => setOuvert(!ouvert) }>
+            <button className="menu-compte__bouton" onClick={ () => setOuvert(!ouvert) }>
                 <span className="avatar">{initiales}</span>
                 {pseudo} {ouvert ? '▲' : '▼'}
             </button>
