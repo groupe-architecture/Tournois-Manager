@@ -10,6 +10,7 @@ import RejoindreTournoi from '../pages/tournoi/RejoindreTournoi'
 import CreerTournoi from '../pages/tournoi/CreerTournoi'
 import DetailTournoi from '../pages/tournoi/DetailTournoi'
 import ConfigurationTournoi from '../pages/tournoi/ConfigurationTournoi'
+import PageMatch from '../pages/match/PageMatch'
 
 
 function AppRoutes() {
@@ -23,6 +24,7 @@ function AppRoutes() {
         <Route path="/tournois/:id" element={<DetailTournoi />} />
         <Route path="/tournois/:id/rejoindre" element={<RejoindreTournoi />} />
         <Route path="/tournois/:id/configuration" element={<ConfigurationTournoi />} />
+        <Route path="/matchs/:id" element={<PageMatch />} />
 
 
         <Route path="/403" element={<Erreur403 />} />

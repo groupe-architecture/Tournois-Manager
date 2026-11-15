@@ -19,3 +19,7 @@
 @import './components/groupe-options.css';
 @import './components/copier-code.css';
 @import './pages/tournoi.css';
+
+/* Matchs (Élève 3) */
+@import './components/match.css';
+@import './pages/match.css';
