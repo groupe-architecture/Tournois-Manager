@@ -1,0 +1,223 @@
+.winners-page {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.winners-page__header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.winners-page__small-title {
+  display: inline-block;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--accent-purple, #7c4dff);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.winners-page__title {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+}
+
+.winners-page__subtitle {
+  color: #a0a0b0;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.podium {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  align-items: end;
+  margin-bottom: 3rem;
+  padding: 2rem 1rem;
+  background-color: var(--card-bg, #191724);
+  border: 1px solid var(--border-color, #2c2a35);
+  border-radius: 16px;
+}
+
+.podium__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.podium__step--tall { order: 2; }
+.podium__step--medium { order: 1; }
+.podium__step--short { order: 3; }
+
+.podium__medal {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.podium__step--tall .podium__medal { font-size: 3.5rem; }
+
+.podium__logo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--accent-purple, #7c4dff);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  border: 3px solid #ffffff;
+}
+
+.podium__step--tall .podium__logo {
+  width: 88px;
+  height: 88px;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #ffd700, #7c4dff);
+}
+
+.podium__team {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+}
+
+.podium__reward {
+  color: var(--accent-green, #45ddb6);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.podium__block {
+  width: 100%;
+  padding: 1rem 0;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+  margin-top: 0.5rem;
+}
+
+.podium__block--1 { background-color: #ffd700; height: 120px; }
+.podium__block--2 { background-color: #c0c0c0; height: 80px; }
+.podium__block--3 { background-color: #cd7f32; height: 50px; }
+
+.podium__rank {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #100f17;
+}
+
+.rewards {
+  margin-bottom: 2rem;
+}
+
+.rewards__title {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.rewards__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.reward-card {
+  background-color: var(--card-bg, #191724);
+  border: 1px solid var(--border-color, #2c2a35);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.reward-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-purple, #7c4dff);
+}
+
+.reward-card__icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.reward-card__title {
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-purple, #7c4dff);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.reward-card__winner {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.reward-card__team {
+  color: #a0a0b0;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.reward-card__value {
+  color: var(--accent-green, #45ddb6);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.winners-page__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.winners-page__button {
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  border: none;
+}
+
+.winners-page__button:hover {
+  transform: translateY(-1px);
+}
+
+.winners-page__button--primary {
+  background-color: var(--accent-purple, #7c4dff);
+  color: #ffffff;
+}
+
+.winners-page__button--secondary {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid var(--border-color, #2c2a35);
+}

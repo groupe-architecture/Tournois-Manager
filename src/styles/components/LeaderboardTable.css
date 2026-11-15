@@ -1,0 +1,99 @@
+.leaderboard {
+  background-color: var(--card-bg, #191724);
+  border: 1px solid var(--border-color, #2c2a35);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.leaderboard__header-row {
+  display: grid;
+  background-color: rgba(124, 77, 255, 0.1);
+  border-bottom: 1px solid var(--border-color, #2c2a35);
+}
+
+.leaderboard__header-cell {
+  padding: 0.75rem 0.5rem;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a0a0b0;
+  text-align: center;
+}
+
+.leaderboard__header-cell--team {
+  text-align: left;
+  padding-left: 1rem;
+}
+
+.leaderboard__row {
+  display: grid;
+  border-bottom: 1px solid var(--border-color, #2c2a35);
+  transition: background-color 0.15s ease;
+}
+
+.leaderboard__row:last-child {
+  border-bottom: none;
+}
+
+.leaderboard__row:hover {
+  background-color: rgba(124, 77, 255, 0.05);
+}
+
+.leaderboard__row--me {
+  background-color: rgba(124, 77, 255, 0.15);
+  border-left: 3px solid var(--accent-purple, #7c4dff);
+}
+
+.leaderboard__cell {
+  padding: 0.85rem 0.5rem;
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leaderboard__cell--team {
+  justify-content: flex-start;
+  padding-left: 1rem;
+  font-weight: 600;
+}
+
+.leaderboard__rank {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  background-color: var(--empty-bar, #2e2a3b);
+  color: #a0a0b0;
+}
+
+.leaderboard__rank--1 { background-color: #ffd700; color: #100f17; }
+.leaderboard__rank--2 { background-color: #c0c0c0; color: #100f17; }
+.leaderboard__rank--3 { background-color: #cd7f32; color: #100f17; }
+
+.leaderboard__diff--pos { color: var(--accent-green, #45ddb6); font-weight: 600; }
+.leaderboard__diff--neg { color: #ff6b6b; font-weight: 600; }
+
+.leaderboard__points {
+  background-color: var(--accent-purple, #7c4dff);
+  color: #ffffff;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.leaderboard-error {
+  color: var(--accent-orange, #ffb43d);
+  padding: 1rem;
+  text-align: center;
+}
