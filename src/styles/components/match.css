@@ -1,0 +1,757 @@
+/* Composants de match (Élève 3) : figures 10 à 19.
+   Les couleurs viennent toutes de variables.css ; les fonds teintés sont
+   les mêmes couleurs avec de la transparence. */
+
+/* --- Badge de statut --- */
+
+.badge-statut {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 28px;
+  padding: 0 13px;
+  border: 1px solid;
+  border-radius: var(--rayon-pastille);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badge-statut--valide {
+  color: var(--couleur-vert);
+  background: rgba(69, 221, 182, 0.1);
+  border-color: rgba(69, 221, 182, 0.4);
+}
+
+.badge-statut--attente {
+  color: var(--couleur-bleu);
+  background: rgba(114, 180, 250, 0.12);
+  border-color: rgba(114, 180, 250, 0.45);
+}
+
+.badge-statut--litige {
+  color: var(--couleur-orange);
+  background: rgba(255, 180, 61, 0.12);
+  border-color: rgba(255, 180, 61, 0.45);
+}
+
+.badge-statut--ajouer,
+.badge-statut--avenir {
+  color: var(--couleur-texte-doux);
+  background: rgba(139, 136, 152, 0.14);
+  border-color: rgba(139, 136, 152, 0.45);
+}
+
+.badge-statut--petite {
+  height: 23px;
+  padding: 0 10px;
+  font-size: 0.72rem;
+}
+
+.badge-statut--grande {
+  height: 34px;
+  padding: 0 16px;
+  font-size: 0.88rem;
+}
+
+/* --- Liste des matchs (figures 10, 13, 16) --- */
+
+.liste-matchs__tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--espace-4);
+  margin-bottom: 20px;
+}
+
+.liste-matchs__tete h2 {
+  font-size: 1.8rem;
+}
+
+.liste-matchs__compteur {
+  color: var(--couleur-texte-doux);
+  font-size: 0.82rem;
+}
+
+.liste-matchs__lien {
+  color: var(--couleur-violet);
+  font-size: 0.82rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.liste-matchs__cartes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* --- Carte d'un match --- */
+
+.carte-match {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espace-4);
+  min-height: 74px;
+  padding: 14px 24px;
+  background: var(--couleur-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 12px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.carte-match--litige {
+  border-color: var(--couleur-orange);
+}
+
+.carte-match--lien:hover {
+  border-color: var(--couleur-violet);
+  transform: translateY(-1px);
+}
+
+.carte-match--litige.carte-match--lien:hover {
+  border-color: var(--couleur-orange);
+  box-shadow: 0 0 0 1px var(--couleur-orange);
+}
+
+.carte-match__equipes {
+  font-size: 1rem;
+}
+
+.carte-match__equipes strong {
+  font-weight: 600;
+}
+
+.carte-match__vs {
+  color: var(--couleur-texte-doux);
+}
+
+.carte-match__droite {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.carte-match__score {
+  font-family: var(--police-titre);
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.carte-match__message {
+  color: var(--couleur-texte-doux);
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+/* --- Suite du tableau (figure 10) --- */
+
+.suite-tableau {
+  margin-top: 22px;
+}
+
+.suite-tableau h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.suite-tableau__cartes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.suite-tableau__carte {
+  min-height: 118px;
+  padding: 22px 20px;
+  background: var(--couleur-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 12px;
+}
+
+.suite-tableau__carte .surtitre {
+  margin-bottom: 8px;
+}
+
+.suite-tableau__equipe {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.suite-tableau__texte {
+  color: var(--couleur-texte-doux);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.suite-tableau__equipe + .suite-tableau__texte,
+.suite-tableau__texte + .suite-tableau__texte {
+  margin-top: 6px;
+}
+
+.suite-tableau__note {
+  margin-top: 16px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.75rem;
+}
+
+/* --- Tableau de coupe (figure 18) --- */
+
+.tableau-coupe {
+  overflow-x: auto;
+}
+
+.tableau-coupe__grille {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  min-width: 640px;
+}
+
+.tableau-coupe__tour {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableau-coupe__titre {
+  margin-bottom: 14px;
+  font-size: 1.35rem;
+}
+
+/* Les matchs se répartissent sur toute la hauteur de la colonne. */
+.tableau-coupe__matchs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.match-tableau {
+  display: block;
+  margin: 34px 0;
+  padding: 18px 17px 16px;
+  background: var(--couleur-carte);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 12px;
+  transition: border-color 0.15s;
+}
+
+.match-tableau--lien:hover {
+  border-color: var(--couleur-violet);
+}
+
+.match-tableau__ligne {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espace-3);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.match-tableau__ligne + .match-tableau__ligne {
+  margin-top: 12px;
+}
+
+.match-tableau__score {
+  font-family: var(--police-titre);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.match-tableau__ligne--perdant {
+  color: var(--couleur-texte-doux);
+  font-weight: 400;
+}
+
+.match-tableau__ligne--perdant .match-tableau__score {
+  font-weight: 500;
+}
+
+.match-tableau__pied {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.match-tableau__note {
+  color: var(--couleur-texte-doux);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+/* --- Blocs de la colonne de droite d'un match --- */
+
+.bloc-match {
+  padding: 24px;
+}
+
+.bloc-match--orange {
+  border-color: var(--couleur-orange);
+}
+
+.bloc-match--bleu {
+  border-color: var(--couleur-bleu);
+}
+
+.bloc-match__titre {
+  font-size: 1.45rem;
+  margin-bottom: 14px;
+}
+
+.bloc-match__titre--petit {
+  font-size: 1.2rem;
+}
+
+.bloc-match__texte {
+  margin-top: 16px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+.bloc-match__titre + .bloc-match__texte {
+  margin-top: 0;
+}
+
+/* Les deux déclarations */
+
+.deux-declarations__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.deux-declarations__table th {
+  padding: 8px 6px;
+  color: var(--couleur-texte-doux);
+  font-weight: 400;
+  text-align: center;
+}
+
+.deux-declarations__table td {
+  padding: 13px 6px;
+  border-top: 1px solid var(--couleur-bordure);
+  font-weight: 700;
+  text-align: center;
+}
+
+.deux-declarations__table th:first-child,
+.deux-declarations__table td:first-child {
+  text-align: left;
+}
+
+.deux-declarations__nom {
+  font-weight: 600;
+}
+
+.deux-declarations__heure {
+  color: var(--couleur-texte-doux);
+  font-size: 0.72rem;
+  font-weight: 400;
+}
+
+.deux-declarations__ecart {
+  color: var(--couleur-orange);
+}
+
+.deux-declarations__table .deux-declarations__attente {
+  color: var(--couleur-texte-doux);
+  font-weight: 400;
+}
+
+.deux-declarations__encart {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(69, 221, 182, 0.45);
+  border-radius: 10px;
+  background: rgba(69, 221, 182, 0.08);
+  color: var(--couleur-vert);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.deux-declarations__encart svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* État du match : la frise */
+
+.etat-match__frise {
+  position: relative;
+  list-style: none;
+}
+
+/* Le trait vertical qui relie les étapes */
+.etat-match__frise::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 16px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--couleur-bordure);
+}
+
+.etat-match__etape {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 0.9rem;
+}
+
+.etat-match__point {
+  position: relative;
+  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--couleur-vert);
+}
+
+.etat-match__detail {
+  color: var(--couleur-texte-doux);
+  font-size: 0.72rem;
+}
+
+.etat-match__actuel {
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+/* En attente : l'étape courante est surlignée en bleu */
+.etat-match__etape--actuelle {
+  margin: 4px 0 4px -10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(114, 180, 250, 0.08);
+}
+
+.etat-match__etape--actuelle .etat-match__point {
+  background: var(--couleur-bleu);
+}
+
+.etat-match__etape--actuelle .etat-match__nom {
+  font-weight: 700;
+}
+
+.etat-match__etape--actuelle .etat-match__actuel {
+  color: var(--couleur-bleu);
+}
+
+.etat-match__suite {
+  padding: 4px 0 4px 22px;
+}
+
+.etat-match__suite > p {
+  margin-bottom: 10px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.etat-match__ou {
+  margin: 8px 0;
+  color: var(--couleur-texte-doux);
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.etat-match__issue {
+  padding: 10px 12px;
+  border: 1px dashed var(--couleur-bordure);
+  border-radius: 10px;
+}
+
+.etat-match__issue strong {
+  display: block;
+  font-size: 0.85rem;
+}
+
+.etat-match__issue-titre {
+  margin-bottom: 2px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.72rem;
+}
+
+.etat-match__issue--litige {
+  border: 1px solid var(--couleur-orange);
+  background: rgba(255, 180, 61, 0.1);
+}
+
+.etat-match__issue--litige .etat-match__actuel {
+  color: var(--couleur-orange);
+}
+
+.etat-match__issue--valide {
+  border: 1px solid var(--couleur-vert);
+  background: rgba(69, 221, 182, 0.1);
+}
+
+.etat-match__issue--valide .etat-match__actuel {
+  color: var(--couleur-vert);
+}
+
+/* --- Saisie du score --- */
+
+.saisie-score {
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
+
+.saisie-score__case {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.saisie-score__case span {
+  color: var(--couleur-texte-doux);
+  font-size: 0.78rem;
+}
+
+.saisie-score__case input {
+  width: 132px;
+  height: 66px;
+  background: var(--couleur-champ);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 12px;
+  font-family: var(--police-titre);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.saisie-score__case input:focus {
+  border-color: var(--couleur-violet);
+}
+
+.saisie-score__case input::placeholder {
+  color: #55526a;
+}
+
+.saisie-score__case input:disabled {
+  opacity: 0.6;
+}
+
+.saisie-score__tiret {
+  padding-bottom: 22px;
+  color: var(--couleur-texte-doux);
+  font-size: 1.2rem;
+}
+
+.saisie-score--erreur .saisie-score__case input {
+  border-color: var(--couleur-orange);
+}
+
+/* --- Tableau de statistiques --- */
+
+.tableau-stats {
+  overflow-x: auto;
+}
+
+.tableau-stats table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableau-stats th {
+  padding: 12px 12px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.82rem;
+  font-weight: 400;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.tableau-stats td {
+  padding: 13px 12px;
+  border-top: 1px solid var(--couleur-bordure);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.tableau-stats__total td {
+  font-weight: 700;
+}
+
+/* --- Statistiques en 1v1 : une ligne de champs (figure 19) --- */
+
+.champs-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.champs-stats__champ {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.champs-stats__champ span {
+  color: var(--couleur-texte-doux);
+  font-size: 0.78rem;
+}
+
+.champs-stats__champ input,
+.champs-stats__champ select {
+  width: 100%;
+  height: 50px;
+  padding: 0 14px;
+  background: var(--couleur-champ);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  outline: none;
+  appearance: none;
+}
+
+.champs-stats__champ input:focus,
+.champs-stats__champ select:focus {
+  border-color: var(--couleur-violet);
+}
+
+.champs-stats__champ option {
+  background: var(--couleur-carte);
+}
+
+/* --- Score d'un match validé (figure 17) --- */
+
+.resultat-match {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--espace-4);
+  padding: 30px 32px;
+}
+
+.resultat-match__equipe strong {
+  display: block;
+  font-size: 1.05rem;
+}
+
+.resultat-match__equipe--droite {
+  text-align: right;
+}
+
+.resultat-match__issue {
+  color: var(--couleur-texte-doux);
+  font-size: 0.78rem;
+}
+
+.resultat-match__issue--victoire {
+  color: var(--couleur-vert);
+}
+
+.resultat-match__score {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.resultat-match__score > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.resultat-match__chiffre {
+  font-family: var(--police-titre);
+  font-size: 4.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.resultat-match__court {
+  margin-top: 6px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.7rem;
+}
+
+.resultat-match__tiret {
+  margin-bottom: 14px;
+  color: var(--couleur-texte-doux);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* --- Écrans moyens et petits --- */
+
+@media (max-width: 700px) {
+  .carte-match {
+    flex-wrap: wrap;
+    padding: 14px 18px;
+  }
+
+  .carte-match__droite {
+    width: 100%;
+    justify-content: space-between;
+    gap: var(--espace-3);
+  }
+
+  .carte-match__message {
+    text-align: left;
+  }
+
+  .suite-tableau__cartes {
+    grid-template-columns: 1fr;
+  }
+
+  .suite-tableau__carte {
+    min-height: 0;
+  }
+
+  .champs-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .resultat-match {
+    grid-template-columns: 1fr 1fr;
+    padding: 24px 20px;
+  }
+
+  .resultat-match__score {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    justify-content: center;
+  }
+
+  .resultat-match__chiffre {
+    font-size: 3.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .saisie-score {
+    gap: 10px;
+  }
+
+  .saisie-score__case {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .saisie-score__case input {
+    width: 100%;
+    height: 58px;
+  }
+}

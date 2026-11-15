@@ -1,6 +1,10 @@
 import { useParams } from 'react-router-dom'
 import Bouton from '../../components/commun/Bouton'
 import EnteteTournoi from '../../components/tournoi/EnteteTournoi'
+import ListeMatchs from '../../components/match/ListeMatchs'
+import SuiteTableau from '../../components/match/SuiteTableau'
+import TableauCoupe from '../../components/match/TableauCoupe'
+import { matchsParTournoi } from '../match/matchsExemple'
 
 // Valeurs d'exemple en dur (celles des figures 10, 13, 16 et 18), rangées par identifiant.
 // Elles seront remplacées par les données de l'API.
@@ -56,6 +60,7 @@ function DetailTournoi() {
   }
 
   const estUneCoupe = tournoi.format === 'Coupe'
+  const matchs = matchsParTournoi[tournoi.id]
 
   return (
     <>
@@ -65,11 +70,20 @@ function DetailTournoi() {
 
       <div className="detail-tournoi__colonnes">
         <div className="detail-tournoi__principal">
-          <Emplacement titre="Liste des matchs avec badges de statut" eleve="3" />
-          {estUneCoupe ? (
-            <Emplacement titre="Tableau de coupe" eleve="3" />
+          {/* Élève 3 : matchs et tableau de coupe.
+              Duel FC (figure 18) s'ouvre sur l'onglet « Tableau » : on y affiche le tableau complet.
+              Quand la barre d'onglets existera, c'est elle qui choisira ce qui s'affiche ici. */}
+          {matchs.tableau ? (
+            <TableauCoupe tours={matchs.tableau} />
           ) : (
-            <Emplacement titre="Tableau de classement" eleve="4" />
+            <>
+              <ListeMatchs titre={matchs.titre} compteur={matchs.compteur} lienTout={matchs.lienTout} matchs={matchs.matchs} />
+              {estUneCoupe ? (
+                <SuiteTableau rencontres={matchs.suite.rencontres} note={matchs.suite.note} />
+              ) : (
+                <Emplacement titre="Tableau de classement" eleve="4" />
+              )}
+            </>
           )}
         </div>
 
