@@ -1,38 +1,26 @@
-// src/components/tabs/TournamentTabs.jsx
-import React from 'react';
-import '../../styles/components/TournamentTabs.css';
-
-const TABS = [
-  { key: 'matchs', label: 'Matchs' },
-  { key: 'classement', label: 'Classement' },
-  { key: 'stats', label: 'Statistiques' },
-  { key: 'chat', label: 'Chat' },
-];
+import { LIBELLES_ONGLETS } from '../../utils/disciplineConfig';
 
 /**
+ * Barre d'onglets de la page d'un tournoi (figures 10, 13, 16, 18).
+ * @param {string[]} onglets - Clés des onglets, dans l'ordre d'affichage
  * @param {string} activeTab - Onglet actif
- * @param {function} onTabChange - Callback au changement d'onglet
- * @param {string} format - 'championnat' | 'coupe'
+ * @param {function} onTabChange - Appelée avec la clé de l'onglet cliqué
  */
-export default function TournamentTabs({ activeTab, onTabChange, format = 'championnat' }) {
-    const visibleTabs = TABS.filter((tab) => {
-    if (tab.key === 'classement' && format === 'coupe') return false;
-    return true;
-  });
-
+export default function TournamentTabs({ onglets, activeTab, onTabChange }) {
   return (
     <nav className="tournament-tabs" role="tablist" aria-label="Sections du tournoi">
-      {visibleTabs.map((tab) => {
-        const isActive = activeTab === tab.key;
+      {onglets.map((cle) => {
+        const actif = activeTab === cle;
         return (
           <button
-            key={tab.key}
+            key={cle}
+            type="button"
             role="tab"
-            aria-selected={isActive}
-            className={`tournament-tabs__tab ${isActive ? 'tournament-tabs__tab--active' : ''}`}
-            onClick={() => onTabChange(tab.key)}
+            aria-selected={actif}
+            className={`tournament-tabs__tab ${actif ? 'tournament-tabs__tab--active' : ''}`}
+            onClick={() => onTabChange(cle)}
           >
-            {tab.label}
+            {LIBELLES_ONGLETS[cle]}
           </button>
         );
       })}

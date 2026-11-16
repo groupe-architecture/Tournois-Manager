@@ -1,29 +1,20 @@
-import React from 'react';
-import { STATS_PANELS } from '../../utils/disciplineConfig';
 import StatCard from './StatCard';
-import '../../styles/components/StatsPanel.css';
 
 /**
- * @param {string} discipline - Clé de discipline
- * @param {Object} statsData - { topScorers: [...], topAssists: [...], ... }
+ * Les blocs de statistiques d'un tournoi, les uns sous les autres
+ * (colonne de droite) ou en grille (onglet « Statistiques »).
+ * @param {Array} blocs - [{ titre, lignes, note }]
+ * @param {boolean} enGrille - Disposition en grille pour l'onglet
  */
-export default function StatsPanel({ discipline, statsData = {} }) {
-  const panels = STATS_PANELS[discipline];
-
-  if (!panels) {
-    return <p className="stats-error">Discipline inconnue.</p>;
+export default function StatsPanel({ blocs = [], enGrille = false }) {
+  if (blocs.length === 0) {
+    return <p className="texte-doux">Aucune statistique pour l’instant : elles apparaissent quand un match est validé.</p>;
   }
 
   return (
-    <div className="stats-panel">
-      {panels.map((panel) => (
-        <StatCard
-          key={panel.key}
-          title={panel.title}
-          icon={panel.icon}
-          unit={panel.unit}
-          data={statsData[panel.key] || []}
-        />
+    <div className={`stats-panel ${enGrille ? 'stats-panel--grille' : ''}`}>
+      {blocs.map((bloc) => (
+        <StatCard key={bloc.titre} titre={bloc.titre} lignes={bloc.lignes} note={bloc.note} />
       ))}
     </div>
   );

@@ -22,6 +22,31 @@ export const matchsParTournoi = {
       ],
       note: 'Le tableau avance à partir des matchs validés uniquement.',
     },
+    // Onglet « Tableau » : le tableau de coupe complet
+    tableau: [
+      {
+        titre: 'Quarts de finale',
+        matchs: [
+          { id: 'aigles-marais', equipes: [{ nom: 'Les Aigles', score: 3 }, { nom: 'FC Marais', score: 1, perdant: true }], statut: 'valide' },
+          { id: 'loups-atlas', equipes: [{ nom: 'Les Loups' }, { nom: 'Atlas United' }], statut: 'attente', note: 'Un seul capitaine a déclaré' },
+          { id: 'redfox-titans', equipes: [{ nom: 'Red Fox' }, { nom: 'Les Titans' }], statut: 'litige', note: 'Déclarations différentes', lien: '/matchs/redfox-titans' },
+          { id: 'nova-corsaires', equipes: [{ nom: 'Nova' }, { nom: 'Les Corsaires' }], statut: 'ajouer' },
+        ],
+      },
+      {
+        titre: 'Demi-finales',
+        matchs: [
+          { id: 'demi-1', equipes: [{ nom: 'Les Aigles' }, { nom: 'Vainqueur Loups / Atlas' }], statut: 'avenir' },
+          { id: 'demi-2', equipes: [{ nom: 'Vainqueur Red Fox / Titans' }, { nom: 'Vainqueur Nova / Corsaires' }], statut: 'avenir' },
+        ],
+      },
+      {
+        titre: 'Finale',
+        matchs: [
+          { id: 'finale', equipes: [{ nom: 'Vainqueur demi 1' }, { nom: 'Vainqueur demi 2' }], statut: 'avenir' },
+        ],
+      },
+    ],
   },
 
   // Figure 16 : Open ECE Valorant (championnat)
@@ -49,6 +74,12 @@ export const matchsParTournoi = {
 
   // Figure 18 : Duel FC du vendredi (EA Sports FC, coupe en 1v1), onglet « Tableau »
   4: {
+    // Onglet « Matchs » : le tour en cours
+    titre: 'Demi-finales',
+    matchs: [
+      { id: 'kenzo-theog', equipeA: 'Kenzo_FC', equipeB: 'TheoG', message: 'Un seul joueur a déclaré', statut: 'attente', lien: '/matchs/kenzo-theog' },
+      { id: 'sofiane-mia', equipeA: 'Sofiane_7', equipeB: 'Mia_Gol', message: 'Aucune déclaration', statut: 'ajouer' },
+    ],
     tableau: [
       {
         titre: 'Quarts de finale',

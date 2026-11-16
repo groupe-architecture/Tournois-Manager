@@ -1,25 +1,20 @@
-import React from 'react';
-import '../../styles/pages/WinnersPage.css';
-
+/**
+ * Podium de l'écran des gagnants (figure 20) : 2e à gauche, 1er au centre, 3e à droite.
+ * @param {Array} podium - [{ place, nom, detail }]
+ */
 export default function Podium({ podium = [] }) {
-  const order = [1, 0, 2];
-  const heights = { 1: 'tall', 2: 'medium', 3: 'short' };
-  const medals = { 1: '🥇', 2: '🥈', 3: '🥉' };
+  const ordre = [2, 1, 3];
 
   return (
     <div className="podium">
-      {order.map((idx) => {
-        const entry = podium[idx];
-        if (!entry) return null;
+      {ordre.map((place) => {
+        const marche = podium.find((p) => p.place === place);
+        if (!marche) return null;
         return (
-          <div key={entry.rank} className={`podium__step podium__step--${heights[entry.rank]}`}>
-            <div className="podium__medal">{medals[entry.rank]}</div>
-            <div className="podium__logo">{entry.logo}</div>
-            <div className="podium__team">{entry.team}</div>
-            <div className="podium__reward">{entry.reward}</div>
-            <div className={`podium__block podium__block--${entry.rank}`}>
-              <span className="podium__rank">#{entry.rank}</span>
-            </div>
+          <div key={place} className={`podium__marche podium__marche--${place}`}>
+            <p className="podium__nom">{marche.nom}</p>
+            <p className="podium__detail">{marche.detail}</p>
+            <div className="podium__bloc">{place}</div>
           </div>
         );
       })}

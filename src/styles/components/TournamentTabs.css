@@ -1,35 +1,45 @@
+/* Barre d'onglets de la page d'un tournoi (Élève 4) : figures 10, 13, 16, 18. */
+
 .tournament-tabs {
   display: flex;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  background-color: var(--card-bg, #191724);
-  border: 1px solid var(--border-color, #2c2a35);
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
+  gap: 28px;
+  margin-top: 30px;
+  border-bottom: 1px solid var(--couleur-bordure);
+  overflow-x: auto;
 }
 
 .tournament-tabs__tab {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  background: transparent;
+  position: relative;
+  flex-shrink: 0;
+  padding: 0 0 12px;
   border: none;
-  border-radius: 8px;
-  color: #a0a0b0;
-  font-family: 'Chakra Petch', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  background: none;
+  color: var(--couleur-texte-doux);
+  font-family: var(--police-texte);
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: color 0.15s;
 }
 
 .tournament-tabs__tab:hover {
-  background-color: rgba(124, 77, 255, 0.1);
-  color: #ffffff;
+  color: var(--couleur-texte);
 }
 
 .tournament-tabs__tab--active {
-  background-color: var(--accent-purple, #7c4dff);
-  color: #ffffff;
+  color: var(--couleur-texte);
+  font-weight: 600;
+}
+
+/* Le trait violet sous l'onglet actif, posé sur la ligne grise */
+.tournament-tabs__tab--active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--couleur-violet);
 }

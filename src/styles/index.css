@@ -23,3 +23,10 @@
 /* Matchs (Élève 3) */
 @import './components/match.css';
 @import './pages/match.css';
+
+/* Classement, statistiques, chat et gagnants (Élève 4) */
+@import './components/TournamentTabs.css';
+@import './components/LeaderboardTable.css';
+@import './components/StatsPanel.css';
+@import './components/TournamentChat.css';
+@import './pages/WinnersPage.css';

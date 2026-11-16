@@ -1,3 +1,7 @@
+// Ce qui change d'une discipline ou d'un format à l'autre dans la page d'un tournoi :
+// colonnes du classement et onglets. L'affichage seulement : les règles de calcul
+// (points, départage) resteront dans la couche service, puis dans l'API.
+
 export const DISCIPLINES = {
   FOOTBALL: 'football',
   BASKETBALL: 'basketball',
@@ -5,82 +9,43 @@ export const DISCIPLINES = {
   EASPORTS_FC: 'ea_sports_fc',
 };
 
-export const LEADERBOARD_COLUMNS = {
-  [DISCIPLINES.FOOTBALL]: [
-    { key: 'rank', label: '#', type: 'rank' },
-    { key: 'team', label: 'Équipe', type: 'team' },
-    { key: 'played', label: 'J', type: 'number' },
-    { key: 'wins', label: 'V', type: 'number' },
-    { key: 'draws', label: 'N', type: 'number' },
-    { key: 'losses', label: 'D', type: 'number' },
-    { key: 'goalsFor', label: 'BP', type: 'number' },
-    { key: 'goalsAgainst', label: 'BC', type: 'number' },
-    { key: 'goalDiff', label: 'Diff', type: 'diff' },
-    { key: 'points', label: 'Pts', type: 'points' },
-  ],
-  [DISCIPLINES.BASKETBALL]: [
-    { key: 'rank', label: '#', type: 'rank' },
-    { key: 'team', label: 'Équipe', type: 'team' },
-    { key: 'played', label: 'J', type: 'number' },
-    { key: 'wins', label: 'V', type: 'number' },
-    { key: 'losses', label: 'D', type: 'number' },
-    { key: 'pointsFor', label: 'PP', type: 'number' },
-    { key: 'pointsAgainst', label: 'PC', type: 'number' },
-    { key: 'pointDiff', label: 'Diff', type: 'diff' },
-    { key: 'points', label: 'Pts', type: 'points' },
-  ],
-  [DISCIPLINES.VALORANT]: [
-    { key: 'rank', label: '#', type: 'rank' },
-    { key: 'team', label: 'Équipe', type: 'team' },
-    { key: 'played', label: 'J', type: 'number' },
-    { key: 'wins', label: 'V', type: 'number' },
-    { key: 'losses', label: 'D', type: 'number' },
-    { key: 'rounds', label: 'Rounds', type: 'number' },
-    { key: 'points', label: 'Pts', type: 'points' },
-  ],
-  [DISCIPLINES.EASPORTS_FC]: [
-    { key: 'rank', label: '#', type: 'rank' },
-    { key: 'team', label: 'Équipe', type: 'team' },
-    { key: 'played', label: 'J', type: 'number' },
-    { key: 'wins', label: 'V', type: 'number' },
-    { key: 'draws', label: 'N', type: 'number' },
-    { key: 'losses', label: 'D', type: 'number' },
-    { key: 'goalsFor', label: 'BP', type: 'number' },
-    { key: 'goalsAgainst', label: 'BC', type: 'number' },
-    { key: 'goalDiff', label: 'Diff', type: 'diff' },
-    { key: 'points', label: 'Pts', type: 'points' },
-  ],
+// Libellé affiché dans les données d'exemple → clé de discipline.
+const CLES = {
+  Football: DISCIPLINES.FOOTBALL,
+  Basketball: DISCIPLINES.BASKETBALL,
+  Valorant: DISCIPLINES.VALORANT,
+  'EA Sports FC': DISCIPLINES.EASPORTS_FC,
 };
 
+export const cleDiscipline = (libelle) => CLES[libelle];
 
-export const STATS_PANELS = {
-  [DISCIPLINES.FOOTBALL]: [
-    { key: 'topScorers', title: 'Meilleurs buteurs', icon: '⚽', unit: 'buts' },
-    { key: 'topAssists', title: 'Meilleures passes déc.', icon: '🎯', unit: 'passes' },
-    { key: 'cleanSheets', title: 'Clean sheets', icon: '🧤', unit: 'matchs' },
-    { key: 'topCards', title: 'Cartons', icon: '🟨', unit: 'cartons' },
-  ],
-  [DISCIPLINES.BASKETBALL]: [
-    { key: 'topScorers', title: 'Meilleurs marqueurs', icon: '🏀', unit: 'points' },
-    { key: 'topRebounds', title: 'Meilleurs rebondeurs', icon: '💪', unit: 'rebonds' },
-    { key: 'topAssists', title: 'Meilleurs passeurs', icon: '🎯', unit: 'passes' },
-    { key: 'topMVP', title: 'MVP du tournoi', icon: '🏆', unit: 'pts' },
-  ],
-  [DISCIPLINES.VALORANT]: [
-    { key: 'topFraggers', title: 'Meilleurs fraggers', icon: '🎯', unit: 'kills' },
-    { key: 'topClutches', title: 'Meilleurs clutcheurs', icon: '🔥', unit: 'clutchs' },
-    { key: 'topAssists', title: 'Meilleurs supports', icon: '🛡️', unit: 'assists' },
-    { key: 'topACS', title: 'Meilleur ACS', icon: '⚡', unit: 'ACS' },
-  ],
-  [DISCIPLINES.EASPORTS_FC]: [
-    { key: 'topScorers', title: 'Meilleurs buteurs', icon: '⚽', unit: 'buts' },
-    { key: 'topAssists', title: 'Meilleures passes déc.', icon: '🎯', unit: 'passes' },
-    { key: 'cleanSheets', title: 'Clean sheets', icon: '🧤', unit: 'matchs' },
-    { key: 'topMVP', title: 'MVP du tournoi', icon: '🏆', unit: 'pts' },
-  ],
+// Colonnes du classement (figures 13 et 16).
+// Pas de colonne N quand le match nul est impossible (basket, Valorant).
+const RANG = { cle: 'rang', titre: '#', type: 'rang' };
+const EQUIPE = { cle: 'equipe', titre: 'Équipe', type: 'equipe' };
+const JOUES = { cle: 'joues', titre: 'J' };
+const VICTOIRES = { cle: 'victoires', titre: 'V' };
+const NULS = { cle: 'nuls', titre: 'N' };
+const DEFAITES = { cle: 'defaites', titre: 'D' };
+const POINTS = { cle: 'points', titre: 'Pts', type: 'points' };
+
+export const COLONNES_CLASSEMENT = {
+  [DISCIPLINES.FOOTBALL]: [RANG, EQUIPE, JOUES, VICTOIRES, NULS, DEFAITES, { cle: 'ecart', titre: 'Diff' }, POINTS],
+  [DISCIPLINES.BASKETBALL]: [RANG, EQUIPE, JOUES, VICTOIRES, DEFAITES, { cle: 'ecart', titre: 'Diff' }, POINTS],
+  [DISCIPLINES.VALORANT]: [RANG, EQUIPE, JOUES, VICTOIRES, DEFAITES, { cle: 'ecart', titre: 'Rounds' }, POINTS],
+  [DISCIPLINES.EASPORTS_FC]: [RANG, EQUIPE, JOUES, VICTOIRES, NULS, DEFAITES, { cle: 'ecart', titre: 'Diff' }, POINTS],
 };
 
-export const allowsDraw = (discipline) =>
-  discipline === DISCIPLINES.FOOTBALL || discipline === DISCIPLINES.EASPORTS_FC;
+// Onglets de la page d'un tournoi : « Classement » en championnat, « Tableau » en coupe.
+export const ONGLETS_PAR_FORMAT = {
+  championnat: ['matchs', 'classement', 'stats', 'chat'],
+  coupe: ['matchs', 'tableau', 'stats', 'chat'],
+};
 
-export const hasLeaderboard = (format) => format === 'championnat';
+export const LIBELLES_ONGLETS = {
+  matchs: 'Matchs',
+  classement: 'Classement',
+  tableau: 'Tableau',
+  stats: 'Statistiques',
+  chat: 'Chat',
+};

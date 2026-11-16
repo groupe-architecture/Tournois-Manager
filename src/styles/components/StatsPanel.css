@@ -1,118 +1,57 @@
+/* Blocs de statistiques (Élève 4) : figures 13, 16, 18. */
+
 .stats-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Onglet « Statistiques » : les blocs en grille dans la colonne principale */
+.stats-panel--grille {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  align-items: start;
 }
 
 .stat-card {
-  background-color: var(--card-bg, #191724);
-  border: 1px solid var(--border-color, #2c2a35);
-  border-radius: 12px;
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  padding: 24px;
 }
 
-.stat-card__header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-color, #2c2a35);
+.stat-card__titre {
+  margin-bottom: 12px;
+  font-size: 1.45rem;
 }
 
-.stat-card__icon {
-  font-size: 1.5rem;
-}
-
-.stat-card__title {
-  font-family: 'Chakra Petch', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.stat-card__list {
+.stat-card__liste {
   list-style: none;
-  padding: 0;
-  margin: 0;
+}
+
+.stat-card__ligne {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.stat-card__item {
-  display: grid;
-  grid-template-columns: 28px 1fr auto;
-  gap: 0.75rem;
-  align-items: center;
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: background-color 0.15s ease;
-}
-
-.stat-card__item:hover {
-  background-color: rgba(124, 77, 255, 0.05);
-}
-
-.stat-card__rank {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.75rem;
-  background-color: var(--empty-bar, #2e2a3b);
-  color: #a0a0b0;
-}
-
-.stat-card__rank--1 { background-color: #ffd700; color: #100f17; }
-.stat-card__rank--2 { background-color: #c0c0c0; color: #100f17; }
-.stat-card__rank--3 { background-color: #cd7f32; color: #100f17; }
-
-.stat-card__info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
-}
-
-.stat-card__name {
-  color: #ffffff;
-  font-weight: 600;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--espace-3);
+  padding: 6px 0;
   font-size: 0.9rem;
+}
+
+.stat-card__equipe,
+.stat-card__detail {
+  color: var(--couleur-texte-doux);
+  font-size: 0.78rem;
+}
+
+.stat-card__valeur {
+  flex-shrink: 0;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.stat-card__team {
-  color: #a0a0b0;
-  font-size: 0.75rem;
-}
-
-.stat-card__value {
-  color: var(--accent-purple, #7c4dff);
+.stat-card__valeur strong {
   font-weight: 700;
-  font-size: 0.95rem;
-  white-space: nowrap;
 }
 
-.stat-card__unit {
-  color: #a0a0b0;
-  font-weight: 400;
-  font-size: 0.75rem;
-  margin-left: 0.25rem;
-}
-
-.stats-error {
-  color: var(--accent-orange, #ffb43d);
-  padding: 1rem;
-  text-align: center;
+.stat-card__note {
+  margin-top: 10px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.72rem;
 }

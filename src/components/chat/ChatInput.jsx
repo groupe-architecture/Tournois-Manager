@@ -1,33 +1,32 @@
-import React, { useState } from 'react';
-import '../../styles/components/TournamentChat.css';
+import { useState } from 'react';
 
 /**
- * @param {function} onSend - Callback(texte) lors de l'envoi
+ * Zone de saisie du chat (« Écrire un message » + « Envoyer »).
+ * @param {function} onSend - Appelée avec le texte du message
  */
 export default function ChatInput({ onSend }) {
-  const [value, setValue] = useState('');
+  const [texte, setTexte] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const trimmed = value.trim();
-    if (!trimmed) return;
-    onSend(trimmed);
-    setValue('');
-  };
+  function envoyer(evenement) {
+    evenement.preventDefault();
+    const message = texte.trim();
+    if (!message) return;
+    onSend(message);
+    setTexte('');
+  }
 
   return (
-    <form className="chat-input" onSubmit={handleSubmit}>
+    <form className="chat-input" onSubmit={envoyer}>
       <input
         type="text"
-        className="chat-input__field"
-        placeholder="Écrire un message..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        className="chat-input__champ"
+        placeholder="Écrire un message"
+        aria-label="Écrire un message"
+        value={texte}
+        onChange={(evenement) => setTexte(evenement.target.value)}
         maxLength={500}
       />
-      <button type="submit" className="chat-input__button" disabled={!value.trim()}>
-        Envoyer
-      </button>
+      <button type="submit" className="bouton bouton--principal chat-input__bouton">Envoyer</button>
     </form>
   );
 }

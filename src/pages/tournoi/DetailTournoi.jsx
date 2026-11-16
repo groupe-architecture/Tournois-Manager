@@ -1,32 +1,20 @@
-import { useState } from 'react'; 
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Bouton from '../../components/commun/Bouton';
 import EnteteTournoi from '../../components/tournoi/EnteteTournoi';
 import ListeMatchs from '../../components/match/ListeMatchs';
 import SuiteTableau from '../../components/match/SuiteTableau';
 import TableauCoupe from '../../components/match/TableauCoupe';
-import { matchsParTournoi } from '../match/matchsExemple';
-
 import TournamentTabs from '../../components/tabs/TournamentTabs';
 import LeaderboardTable from '../../components/classement/LeaderboardTable';
 import StatsPanel from '../../components/stats/StatsPanel';
 import TournamentChat from '../../components/chat/TournamentChat';
+import { matchsParTournoi } from '../match/matchsExemple';
+import { classementsParTournoi, statsParTournoi, chatsParTournoi } from '../../services/mocks/tournamentMockData';
+import { cleDiscipline, ONGLETS_PAR_FORMAT } from '../../utils/disciplineConfig';
 
-import {
-  mockLeaderboardBasketball,
-  mockLeaderboardValorant,
-  mockStatsBasketball,
-  mockStatsValorant,
-  mockChatMessages,
-} from '../../services/mocks/tournamentMockData';
-import { DISCIPLINES } from '../../utils/disciplineConfig';
-
-import '../../styles/components/TournamentTabs.css';
-import '../../styles/components/LeaderboardTable.css';
-import '../../styles/components/StatsPanel.css';
-import '../../styles/components/TournamentChat.css';
-
-// Valeurs d'exemple en dur
+// Valeurs d'exemple en dur (celles des figures 10, 13, 16 et 18), rangées par identifiant.
+// Elles seront remplacées par les données de l'API.
 const tournoisExemple = {
   1: {
     id: 1, discipline: 'Football', mode: '5v5', format: 'Coupe', visibilite: 'Public',
@@ -44,24 +32,15 @@ const tournoisExemple = {
     id: 3, discipline: 'Basketball', mode: '3x3', format: 'Championnat', visibilite: 'Public',
     nom: 'Playground 3x3', createur: 'BDE_Sport', participants: '6 équipes', statut: 'en cours',
     pastilles: ['Score en points', 'Pas de match nul', 'Victoire 2 pts · Défaite 1 pt', 'Stats : points, rebonds, passes'],
-    estCreateur: false,
+    estCreateur: false, monEquipe: { nom: 'Paris Rim', role: 'capitaine' },
   },
   4: {
     id: 4, discipline: 'EA Sports FC', mode: '1v1', format: 'Coupe', visibilite: 'Public',
     nom: 'Duel FC du vendredi', createur: 'MaPseudo', participants: '8 joueurs', statut: 'en cours',
     pastilles: ['Score en buts', '1v1 : chaque joueur est son propre capitaine', 'Stats : buts, passes déc., cartons, clean sheets'],
-    estCreateur: true,
+    estCreateur: true, onglets: ['tableau', 'matchs', 'stats', 'chat'],
   },
 };
-
-function Emplacement({ titre, eleve }) {
-  return (
-    <div className="emplacement" style={{ padding: '1rem', border: '1px dashed #7c4dff', borderRadius: '8px', color: '#a0a0b0', marginBottom: '1rem' }}>
-      <strong>{titre}</strong>
-      <span> (À brancher par l'Élève {eleve})</span>
-    </div>
-  );
-}
 
 function DetailTournoi() {
   const { id } = useParams();
@@ -77,85 +56,71 @@ function DetailTournoi() {
     );
   }
 
+  // La clé remet la page à zéro (onglet, messages) quand on passe d'un tournoi à un autre.
+  return <ContenuTournoi key={tournoi.id} tournoi={tournoi} />;
+}
+
+function ContenuTournoi({ tournoi }) {
   const estUneCoupe = tournoi.format === 'Coupe';
+  const discipline = cleDiscipline(tournoi.discipline);
+  const onglets = tournoi.onglets || ONGLETS_PAR_FORMAT[estUneCoupe ? 'coupe' : 'championnat'];
+
   const matchs = matchsParTournoi[tournoi.id];
+  const classement = classementsParTournoi[tournoi.id];
+  const stats = statsParTournoi[tournoi.id] || { dansColonne: false, blocs: [] };
 
-  const [activeTab, setActiveTab] = useState('matchs');
-  const currentFormat = estUneCoupe ? 'coupe' : 'championnat';
+  const [onglet, setOnglet] = useState(onglets[0]);
+  // Le chat est partagé entre la colonne de droite et l'onglet « Chat » : ses messages vivent ici.
+  const [messages, setMessages] = useState(chatsParTournoi[tournoi.id] || []);
 
-  const getDisciplineKey = (disciplineStr) => {
-    if (disciplineStr === 'Basketball') return DISCIPLINES.BASKETBALL;
-    if (disciplineStr === 'Valorant') return DISCIPLINES.VALORANT;
-    if (disciplineStr === 'Football') return DISCIPLINES.FOOTBALL;
-    if (disciplineStr === 'EA Sports FC') return DISCIPLINES.EASPORTS_FC;
-    return DISCIPLINES.BASKETBALL; // Fallback par défaut
-  };
+  function envoyerMessage(texte) {
+    const maintenant = new Date();
+    const heure = `${String(maintenant.getHours()).padStart(2, '0')}:${String(maintenant.getMinutes()).padStart(2, '0')}`;
+    setMessages([...messages, { id: messages.length + 1, auteur: 'MaPseudo', createur: tournoi.estCreateur, heure, texte }]);
+  }
 
-  const currentDiscipline = getDisciplineKey(tournoi.discipline);
+  const chat = <TournamentChat messages={messages} onSend={envoyerMessage} />;
 
-  const leaderboardData = currentDiscipline === DISCIPLINES.VALORANT ? mockLeaderboardValorant : mockLeaderboardBasketball;
-  const statsData = currentDiscipline === DISCIPLINES.VALORANT ? mockStatsValorant : mockStatsBasketball;
-  const myTeamName = tournoi.monEquipe?.nom || 'Paris Rim';
-
-    return (
+  return (
     <>
       <EnteteTournoi tournoi={tournoi} />
 
-      <TournamentTabs
-        activeTab={activeTab}
-        onTabChange={setActiveTab}
-        format={currentFormat}
-      />
+      <TournamentTabs onglets={onglets} activeTab={onglet} onTabChange={setOnglet} />
 
       <div className="detail-tournoi__colonnes">
         <div className="detail-tournoi__principal">
-
-          {activeTab === 'matchs' && (
-            estUneCoupe && matchs.tableau ? (
-              <TableauCoupe tours={matchs.tableau} />
-            ) : (
-              <ListeMatchs
-                titre={matchs.titre}
-                compteur={matchs.compteur}
-                lienTout={matchs.lienTout}
-                matchs={matchs.matchs}
-              />
-            )
+          {onglet === 'matchs' && (
+            <>
+              <ListeMatchs titre={matchs.titre} compteur={matchs.compteur} lienTout={matchs.lienTout} matchs={matchs.matchs} />
+              {estUneCoupe && matchs.suite && (
+                <SuiteTableau rencontres={matchs.suite.rencontres} note={matchs.suite.note} />
+              )}
+              {!estUneCoupe && classement && (
+                <LeaderboardTable
+                  discipline={discipline}
+                  lignes={classement.lignes}
+                  note={classement.note}
+                  lienTout={classement.lienTout}
+                  onLienTout={() => setOnglet('classement')}
+                />
+              )}
+            </>
           )}
 
-          {activeTab === 'classement' && currentFormat === 'championnat' && (
-            <LeaderboardTable
-              rows={leaderboardData}
-              discipline={currentDiscipline}
-              myTeamName={myTeamName}
-            />
+          {onglet === 'tableau' && matchs.tableau && <TableauCoupe tours={matchs.tableau} />}
+
+          {onglet === 'classement' && classement && (
+            <LeaderboardTable discipline={discipline} lignes={classement.lignes} note={classement.note} />
           )}
 
-          {activeTab === 'classement' && currentFormat === 'coupe' && (
-            <Emplacement titre="Tableau de coupe" eleve="3" />
-          )}
+          {onglet === 'stats' && <StatsPanel blocs={stats.blocs} enGrille />}
 
-          {(activeTab === 'stats' || activeTab === 'chat') && (
-            <div className="detail-tournoi__rappel">
-              <p>Voir la colonne de droite pour les {activeTab === 'stats' ? 'statistiques' : 'messages du chat'}.</p>
-            </div>
-          )}
+          {onglet === 'chat' && chat}
         </div>
 
         <aside className="detail-tournoi__lateral">
-          {activeTab === 'stats' && (
-            <StatsPanel
-              discipline={currentDiscipline}
-              statsData={statsData}
-            />
-          )}
-
-          {activeTab === 'chat' && (
-            <TournamentChat
-              messages={mockChatMessages}
-              currentUserName="MaPseudo"
-            />
-          )}
+          {stats.dansColonne && onglet !== 'stats' && <StatsPanel blocs={stats.blocs} />}
+          {onglet !== 'chat' && chat}
         </aside>
       </div>
     </>
