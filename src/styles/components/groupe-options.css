@@ -1,0 +1,110 @@
+/* Groupe de choix : cartes (titre + description) ou pilules (figure 6). */
+
+.groupe-options__label {
+  margin-bottom: var(--espace-3);
+  color: var(--couleur-texte-doux);
+  font-size: 0.9rem;
+}
+
+.groupe-options__liste--cartes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espace-4);
+}
+
+.groupe-options__liste--pilules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+}
+
+/* Option en carte */
+.option-carte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-1);
+  padding: 20px 24px;
+  border: 2px solid var(--couleur-bordure);
+  border-radius: 14px;
+  background: var(--couleur-carte);
+  text-align: left;
+  transition: border-color 0.15s;
+}
+
+.option-carte strong {
+  font-size: 1.1rem;
+}
+
+.option-carte span {
+  color: var(--couleur-texte-doux);
+  font-size: 0.9rem;
+}
+
+.option-carte:hover {
+  border-color: var(--couleur-violet);
+}
+
+.option-carte--choisie {
+  border-color: var(--couleur-violet);
+  background: #1c1530;
+}
+
+/* Option en pilule */
+.option-pilule {
+  padding: 10px 22px;
+  border: 1px solid var(--couleur-bordure);
+  border-radius: var(--rayon-pastille);
+  background: var(--couleur-carte);
+  transition: border-color 0.15s;
+}
+
+.option-pilule:hover {
+  border-color: var(--couleur-violet);
+}
+
+.option-pilule--choisie {
+  border-color: var(--couleur-violet);
+  background: var(--couleur-violet);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .groupe-options__liste--cartes {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Texte d'aide sous un groupe */
+.groupe-options__aide {
+  margin-top: var(--espace-3);
+  font-size: 0.85rem;
+}
+
+/* Option en petit bouton rectangulaire (page de configuration, figure 7) */
+.groupe-options__liste--boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+}
+
+.option-bouton {
+  padding: 12px 20px;
+  border: 2px solid var(--couleur-bordure);
+  border-radius: var(--rayon-champ);
+  background: var(--couleur-carte);
+  transition: border-color 0.15s;
+}
+
+.option-bouton:hover:not(:disabled) {
+  border-color: var(--couleur-violet);
+}
+
+.option-bouton--choisie {
+  border-color: var(--couleur-violet);
+  background: #1c1530;
+}
+
+.option-bouton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

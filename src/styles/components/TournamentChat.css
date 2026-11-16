@@ -1,0 +1,87 @@
+/* Chat du tournoi (Élève 4) : figures 10, 13, 16, 18. */
+
+.tournament-chat {
+  padding: 0;
+  overflow: hidden;
+}
+
+.tournament-chat__tete {
+  padding: 24px 24px 16px;
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.tournament-chat__titre {
+  font-size: 1.45rem;
+}
+
+.tournament-chat__sous-titre {
+  margin-top: 2px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.78rem;
+}
+
+.tournament-chat__messages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 20px 24px;
+  list-style: none;
+  border-bottom: 1px solid var(--couleur-bordure);
+}
+
+.chat-message__meta {
+  margin-bottom: 3px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.75rem;
+}
+
+.chat-message__meta strong {
+  color: var(--couleur-texte);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.chat-message__meta .chat-message__auteur--createur {
+  color: var(--couleur-violet-clair);
+}
+
+.chat-message__texte {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.chat-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 24px 24px;
+}
+
+.chat-input__champ {
+  width: 100%;
+  height: 46px;
+  padding: 0 16px;
+  background: var(--couleur-champ);
+  border: 1px solid var(--couleur-bordure);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.chat-input__champ:focus {
+  border-color: var(--couleur-violet);
+}
+
+.chat-input__champ::placeholder {
+  color: var(--couleur-texte-doux);
+}
+
+.chat-input__bouton {
+  height: 43px;
+  padding: 0 18px;
+}

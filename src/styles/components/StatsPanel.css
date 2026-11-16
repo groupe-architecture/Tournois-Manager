@@ -1,0 +1,57 @@
+/* Blocs de statistiques (Élève 4) : figures 13, 16, 18. */
+
+.stats-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Onglet « Statistiques » : les blocs en grille dans la colonne principale */
+.stats-panel--grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  align-items: start;
+}
+
+.stat-card {
+  padding: 24px;
+}
+
+.stat-card__titre {
+  margin-bottom: 12px;
+  font-size: 1.45rem;
+}
+
+.stat-card__liste {
+  list-style: none;
+}
+
+.stat-card__ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--espace-3);
+  padding: 6px 0;
+  font-size: 0.9rem;
+}
+
+.stat-card__equipe,
+.stat-card__detail {
+  color: var(--couleur-texte-doux);
+  font-size: 0.78rem;
+}
+
+.stat-card__valeur {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.stat-card__valeur strong {
+  font-weight: 700;
+}
+
+.stat-card__note {
+  margin-top: 10px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.72rem;
+}

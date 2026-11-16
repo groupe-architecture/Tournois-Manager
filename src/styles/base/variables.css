@@ -5,10 +5,11 @@
   --couleur-champ: #13111c;
   --couleur-bordure: #2c2a35;
   --couleur-violet: #7c4dff;
+  --couleur-violet-clair: #b9a4ff; /* noms du créateur, points du classement, petits titres (figures 13, 16, 20) */
   --couleur-orange: #ffb43d;
   --couleur-vert: #45ddb6;
   --couleur-piste: #2e2a3b;
-  --couleur-bleu: #5aa9ff; /* à vérifier sur la maquette (badge "en attente") */
+  --couleur-bleu: #72b4fa; /* relevé sur les maquettes (badge « en attente », figure 19) */
   --couleur-gris: #8b8898;
 
   --couleur-texte: #f2f1f7;

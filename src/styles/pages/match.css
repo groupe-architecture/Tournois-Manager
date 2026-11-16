@@ -1,0 +1,223 @@
+/* Page d'un match (Élève 3) : figures 11, 12, 14, 15, 17, 19. */
+
+.page-match__retour {
+  display: inline-block;
+  color: var(--couleur-texte-doux);
+  font-size: 0.82rem;
+}
+
+.page-match__retour:hover {
+  color: var(--couleur-texte);
+}
+
+.page-match__surtitre {
+  margin-top: 14px;
+}
+
+.page-match__titre {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 8px;
+}
+
+.page-match__titre h1 {
+  font-size: clamp(2rem, 4.5vw, 3.15rem);
+}
+
+.page-match__vs {
+  color: var(--couleur-texte-doux);
+}
+
+.page-match__introuvable {
+  margin-top: var(--espace-5);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+}
+
+.page-match__intro {
+  margin: var(--espace-3) 0 var(--espace-5);
+}
+
+/* Deux colonnes : le bloc principal à gauche, les blocs d'information à droite */
+.page-match__colonnes {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 38px;
+  align-items: start;
+  margin-top: 26px;
+}
+
+.page-match__principal,
+.page-match__lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+/* --- Bloc principal : déclaration du capitaine ou arbitrage du créateur --- */
+
+.bloc-declaration {
+  padding: 32px;
+}
+
+.bloc-declaration--orange {
+  border-color: var(--couleur-orange);
+}
+
+.bloc-declaration__titre {
+  font-size: 1.65rem;
+  margin-bottom: 20px;
+}
+
+.bloc-declaration__intro {
+  margin: -10px 0 18px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.bloc-declaration__note {
+  margin-top: 18px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.8rem;
+}
+
+.bloc-declaration__note--serree {
+  margin-top: 2px;
+}
+
+.bloc-declaration__erreur,
+.bloc-declaration__alerte {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  color: var(--couleur-orange);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.bloc-declaration__erreur svg,
+.bloc-declaration__alerte svg {
+  flex-shrink: 0;
+}
+
+.bloc-declaration__sous-titre {
+  margin-top: 34px;
+  font-family: var(--police-texte);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.bloc-declaration__sous-titre + .tableau-stats {
+  margin-top: 12px;
+}
+
+.bloc-declaration__sous-titre--score {
+  margin: 0 0 12px;
+}
+
+.bloc-declaration__aide {
+  margin-top: 22px;
+  color: var(--couleur-texte-doux);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.bloc-declaration__aide--bas {
+  margin-top: 14px;
+}
+
+.bloc-declaration .message {
+  margin: 16px 0 0;
+}
+
+.bloc-declaration__bouton {
+  height: 50px;
+  margin-top: 18px;
+  border-radius: 12px;
+}
+
+.bloc-declaration__bouton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bloc-declaration__separation {
+  height: 1px;
+  margin: 20px 0 24px;
+  background: var(--couleur-bordure);
+}
+
+/* Tableau des déclarations dans la vue créateur */
+
+.tableau-arbitrage td {
+  color: var(--couleur-texte-doux);
+}
+
+.tableau-arbitrage td strong {
+  color: var(--couleur-texte);
+}
+
+.tableau-arbitrage th:not(:first-child):not(:last-child) {
+  text-align: center;
+}
+
+.tableau-arbitrage .tableau-arbitrage__valeur {
+  color: var(--couleur-texte);
+  font-family: var(--police-titre);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.tableau-arbitrage .tableau-arbitrage__valeur--ecart {
+  color: var(--couleur-orange);
+}
+
+/* --- Match validé : statistiques d'une équipe (figure 17) --- */
+
+.bloc-equipe {
+  padding: 28px 32px;
+}
+
+.bloc-equipe__tete {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--espace-2) var(--espace-4);
+  margin-bottom: 8px;
+}
+
+.bloc-equipe__tete h2 {
+  font-size: 1.45rem;
+}
+
+.bloc-equipe__tete span {
+  color: var(--couleur-texte-doux);
+  font-size: 0.78rem;
+}
+
+/* --- Écrans moyens et petits --- */
+
+@media (max-width: 1000px) {
+  .page-match__colonnes {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .bloc-declaration,
+  .bloc-equipe {
+    padding: 22px 18px;
+  }
+
+  .bloc-declaration__titre {
+    font-size: 1.35rem;
+  }
+}
