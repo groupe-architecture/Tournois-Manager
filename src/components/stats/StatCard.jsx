@@ -1,31 +1,29 @@
-import React from 'react';
-import '../../styles/components/StatsPanel.css';
-
-
-export default function StatCard({ title, icon, unit, data = [] }) {
+/**
+ * Un bloc de statistiques (« Meilleurs marqueurs », « Buteurs », « Clean sheets »…),
+ * figures 13, 16 et 18. Chaque ligne : rang (facultatif), joueur, équipe (facultative), valeur.
+ */
+export default function StatCard({ titre, lignes = [], note }) {
   return (
-    <div className="stat-card">
-      <div className="stat-card__header">
-        <span className="stat-card__icon">{icon}</span>
-        <h3 className="stat-card__title">{title}</h3>
-      </div>
+    <section className="carte stat-card">
+      <h2 className="stat-card__titre">{titre}</h2>
 
-      <ul className="stat-card__list">
-        {data.slice(0, 5).map((entry) => (
-          <li key={entry.rank} className="stat-card__item">
-            <span className={`stat-card__rank stat-card__rank--${entry.rank}`}>
-              {entry.rank}
+      <ol className="stat-card__liste">
+        {lignes.map((ligne) => (
+          <li key={ligne.nom} className="stat-card__ligne">
+            <span className="stat-card__joueur">
+              {ligne.rang && `${ligne.rang}. `}{ligne.nom}
+              {ligne.equipe && <span className="stat-card__equipe"> · {ligne.equipe}</span>}
             </span>
-            <div className="stat-card__info">
-              <span className="stat-card__name">{entry.name}</span>
-              <span className="stat-card__team">{entry.team}</span>
-            </div>
-            <span className="stat-card__value">
-              {entry.value} <span className="stat-card__unit">{unit}</span>
+            <span className="stat-card__valeur">
+              <strong>{ligne.valeur}</strong>
+              {ligne.unite && <span className="stat-card__detail"> {ligne.unite}</span>}
+              {ligne.detail && <span className="stat-card__detail"> · {ligne.detail}</span>}
             </span>
           </li>
         ))}
-      </ul>
-    </div>
+      </ol>
+
+      {note && <p className="stat-card__note">{note}</p>}
+    </section>
   );
 }

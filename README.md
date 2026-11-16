@@ -18,7 +18,8 @@ L'application est développée avec **React** et **Vite**. Le projet se construi
 8. [Structure du projet](#structure-du-projet)
 9. [Stack technique](#stack-technique)
 10. [Installation](#installation)
-11. [Équipe](#équipe)
+11. [Pages de l'application](#pages-de-lapplication)
+12. [Équipe](#équipe)
 
 ---
 
@@ -342,6 +343,8 @@ Même principe pour les **statistiques globales** : ce sont des agrégats (somme
 - Affichage des matchs, du classement et des statistiques
 - Mise en place du pattern Strategy pour les disciplines
 
+**État actuel :** toutes les pages des maquettes sont développées et navigables (accueil, tournois, création, inscription, configuration, profil, pages de tournoi, pages de match, écran des gagnants). Les comportements sont simulés avec des données d'exemple (`pages/match/matchsExemple.js`, `services/mocks/`) : la connexion, la validation des scores et le calcul du classement réels, ainsi que les classes de règles (`services/regles/`), arrivent avec l'API.
+
 ### Phase 2 : API REST
 
 - Extraction de la logique métier (règles, validation, classement) dans une API qui devient la seule autorité
@@ -381,28 +384,33 @@ Exemples de routes :
 ├── index.html                 Page HTML unique (point d'entrée de Vite)
 ├── vite.config.js             Configuration de Vite
 ├── package.json               Dépendances et scripts
-├── public/                    Fichiers statiques (favicon, icônes)
+├── public/                    Fichiers statiques (logo, icônes)
 ├── src/
 │   ├── main.jsx               Point d'entrée React
 │   ├── App.jsx                Composant racine
-│   ├── assets/                Images importées dans le code
-│   ├── pages/                 Une page par écran (accueil, tournoi, classement...)
-│   ├── components/            Composants réutilisables (carte de match, badge de statut...)
-│   ├── layouts/               Gabarits communs (en-tête, navigation)
-│   ├── routes/                Définition des routes
-│   ├── context/               État global (utilisateur connecté...)
-│   ├── hooks/                 Hooks personnalisés
-│   ├── services/              Logique métier et accès aux données
-│   │   └── regles/
-│   │       ├── RegleDiscipline.js
-│   │       ├── RegleFactory.js
-│   │       ├── ScoreParButs.js
-│   │       ├── RegleFoot.js
-│   │       ├── RegleBasket.js
-│   │       ├── RegleValorant.js
-│   │       └── RegleFifa.js
-│   ├── utils/                 Fonctions utilitaires
-│   └── styles/                CSS partagé
+│   ├── routes/                Définition des routes (AppRoutes.jsx)
+│   ├── layouts/               Gabarit commun : barre de navigation, notifications, menu du compte, pied de page
+│   ├── pages/                 Une page par écran
+│   │   ├── accueil/           Accueil, inscription et connexion
+│   │   ├── profil/            Profil et tableau de bord
+│   │   ├── tournoi/           Liste, création, inscription, configuration et page d'un tournoi
+│   │   ├── match/             Page d'un match (vues capitaine, créateur, match validé) et données d'exemple
+│   │   ├── gagnants/          Écran des gagnants
+│   │   └── erreurs/           Pages 403 et 404
+│   ├── components/            Composants réutilisables
+│   │   ├── commun/            Bouton, champ, message
+│   │   ├── tournoi/           Carte et en-tête de tournoi, code privé
+│   │   ├── match/             Badge de statut, carte et liste de matchs, tableau de coupe, blocs d'un match
+│   │   ├── tabs/              Onglets de la page d'un tournoi
+│   │   ├── classement/        Tableau de classement
+│   │   ├── stats/             Blocs de statistiques
+│   │   └── chat/              Chat du tournoi
+│   ├── services/
+│   │   ├── mocks/             Données d'exemple (classements, statistiques, chat, gagnants)
+│   │   └── regles/            Classes de règles par discipline (prévues avec l'API)
+│   ├── utils/                 Configuration des disciplines (colonnes du classement, onglets)
+│   ├── context/, hooks/       Prévus pour l'utilisateur connecté et les appels à l'API
+│   └── styles/                CSS : variables, base, composants et pages (importés par styles/index.css)
 └── README.md
 ```
 
@@ -446,8 +454,35 @@ Les dossiers `node_modules/` et `dist/` ne sont pas versionnés : ils se régén
 
 ---
 
+## Pages de l'application
+
+Une fois `npm run dev` lancé, chaque écran des maquettes s'ouvre à l'adresse suivante (sur `http://localhost:5173`) :
+
+| Écran | Adresse |
+|---|---|
+| Accueil, inscription et connexion | `/` |
+| Liste des tournois et accès par code | `/tournois` |
+| Création d'un tournoi | `/tournois/creer` |
+| Rejoindre un tournoi | `/tournois/2/rejoindre` |
+| Configuration d'un tournoi | `/tournois/1/configuration` |
+| Profil et tableau de bord | `/profil` |
+| Pages de tournoi (football, Valorant, basketball, EA Sports FC) | `/tournois/1` à `/tournois/4` |
+| Match en litige, vue capitaine | `/matchs/redfox-titans?vue=capitaine` |
+| Match en litige, vue créateur (arbitrage) | `/matchs/redfox-titans` |
+| Match de basketball en litige | `/matchs/parisrim-rebond` (ajouter `?vue=createur` pour l'arbitrage) |
+| Match validé par concordance | `/matchs/phoenix-vandal` |
+| Match en attente de la seconde déclaration | `/matchs/kenzo-theog` |
+| Écran des gagnants | `/tournois/1/gagnants` à `/tournois/4/gagnants` |
+
+Il n'y a pas encore de vraie connexion : la barre du haut affiche toujours le compte `MaPseudo`, et la vue capitaine ou créateur d'un match se choisit avec `?vue=` dans l'adresse.
+
+---
+
 ## Équipe
 
 | Membre | Rôle |
 |---|---|
-| *À compléter* | |
+| Aliou | Socle : routeur, variables CSS, gabarit (navigation, notifications, menu du compte), accueil, profil, pages d'erreur |
+| Serkan | Tournois : liste, accès par code, création, inscription, configuration, en-tête de la page d'un tournoi |
+| Arthur | Matchs et arbitrage : badges de statut, listes de matchs, tableau de coupe, page d'un match |
+| Jordan | Onglets de la page d'un tournoi, classement, statistiques, chat, écran des gagnants |

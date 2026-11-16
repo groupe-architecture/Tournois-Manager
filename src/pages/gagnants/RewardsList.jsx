@@ -1,23 +1,17 @@
-import React from 'react';
-import '../../styles/pages/WinnersPage.css';
-
-export default function RewardsList({ rewards = [] }) {
-  if (rewards.length === 0) return null;
-
+/**
+ * Les trois distinctions individuelles sous le podium (figure 20).
+ * @param {Array} distinctions - [{ titre, nom, detail }]
+ */
+export default function RewardsList({ distinctions = [] }) {
   return (
-    <div className="rewards">
-      <h3 className="rewards__title">🏅 Récompenses individuelles</h3>
-      <div className="rewards__grid">
-        {rewards.map((reward, idx) => (
-          <div key={idx} className="reward-card">
-            <div className="reward-card__icon">{reward.icon}</div>
-            <div className="reward-card__title">{reward.title}</div>
-            <div className="reward-card__winner">{reward.winner}</div>
-            <div className="reward-card__team">{reward.team}</div>
-            <div className="reward-card__value">{reward.value}</div>
-          </div>
-        ))}
-      </div>
-    </div>
+    <ul className="distinctions">
+      {distinctions.map((distinction) => (
+        <li key={distinction.titre} className="distinctions__carte">
+          <p className="surtitre distinctions__titre">{distinction.titre}</p>
+          <p className="distinctions__nom">{distinction.nom}</p>
+          <p className="distinctions__detail">{distinction.detail}</p>
+        </li>
+      ))}
+    </ul>
   );
 }

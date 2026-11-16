@@ -12,7 +12,7 @@ import DetailTournoi from '../pages/tournoi/DetailTournoi'
 import ConfigurationTournoi from '../pages/tournoi/ConfigurationTournoi'
 import PageMatch from '../pages/match/PageMatch'
 
-import WinnersPage from '../pages/gagnants/WinnersPage';
+import WinnersPage from '../pages/gagnants/WinnersPage'
 
 
 function AppRoutes() {
@@ -27,13 +27,10 @@ function AppRoutes() {
         <Route path="/tournois/:id/rejoindre" element={<RejoindreTournoi />} />
         <Route path="/tournois/:id/configuration" element={<ConfigurationTournoi />} />
         <Route path="/matchs/:id" element={<PageMatch />} />
-
+        <Route path="/tournois/:id/gagnants" element={<WinnersPage />} />
 
         <Route path="/403" element={<Erreur403 />} />
         <Route path="*" element={<Erreur404 />} />
-        <Route path="/tournois/:id/gagnants" element={<WinnersPage />} />
-    
-
       </Route>
     </Routes>
   )

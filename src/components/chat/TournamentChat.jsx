@@ -1,55 +1,27 @@
-import React, { useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-import '../../styles/components/TournamentChat.css';
 
 /**
- * @param {Array} messages - Liste des messages
- * @param {function} onSend - Callback d'envoi (mock pour l'instant)
- * @param {string} currentUserName - Nom du joueur courant
+ * Chat du tournoi (figures 10, 13, 16, 18), réservé aux participants.
+ * La page garde la liste des messages ; l'envoi est simulé (rien ne part vers un serveur).
+ * @param {Array} messages - [{ id, auteur, createur, heure, texte }]
+ * @param {function} onSend - Appelée avec le texte du nouveau message
  */
-export default function TournamentChat({ messages = [], onSend, currentUserName = 'MaPseudo' }) {
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [messages]);
-
-  const handleSend = (text) => {
-    if (onSend) {
-      onSend(text);
-    } else {
-      console.log('[Chat mock] Message envoyé :', text);
-    }
-  };
-
+export default function TournamentChat({ messages = [], onSend }) {
   return (
-    <aside className="tournament-chat">
-      <div className="tournament-chat__header">
-        <h3 className="tournament-chat__title">💬 Chat du tournoi</h3>
-        <span className="tournament-chat__count">{messages.length} messages</span>
+    <section className="carte tournament-chat">
+      <div className="tournament-chat__tete">
+        <h2 className="tournament-chat__titre">Chat du tournoi</h2>
+        <p className="tournament-chat__sous-titre">Réservé aux participants</p>
       </div>
 
-      <div className="tournament-chat__messages" ref={scrollRef}>
-        {messages.length === 0 ? (
-          <p className="tournament-chat__empty">Aucun message pour l'instant. Sois le premier à écrire !</p>
-        ) : (
-          messages.map((msg) => (
-            <ChatMessage
-              key={msg.id}
-              author={msg.author}
-              avatar={msg.avatar}
-              timestamp={msg.timestamp}
-              text={msg.text}
-              isMe={msg.author === currentUserName}
-            />
-          ))
-        )}
-      </div>
+      <ul className="tournament-chat__messages">
+        {messages.map((message) => (
+          <ChatMessage key={message.id} {...message} />
+        ))}
+      </ul>
 
-      <ChatInput onSend={handleSend} />
-    </aside>
+      <ChatInput onSend={onSend} />
+    </section>
   );
 }

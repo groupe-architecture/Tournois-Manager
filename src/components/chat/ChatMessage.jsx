@@ -1,17 +1,14 @@
-import React from 'react';
-import '../../styles/components/TournamentChat.css';
-
-export default function ChatMessage({ author, avatar, timestamp, text, isMe = false }) {
+/**
+ * Un message du chat : auteur (en violet s'il a créé le tournoi), rôle, heure, puis le texte.
+ */
+export default function ChatMessage({ auteur, createur = false, heure, texte }) {
   return (
-    <div className={`chat-message ${isMe ? 'chat-message--me' : ''}`}>
-      <div className="chat-message__avatar">{avatar}</div>
-      <div className="chat-message__body">
-        <div className="chat-message__meta">
-          <span className="chat-message__author">{author}</span>
-          <span className="chat-message__time">{timestamp}</span>
-        </div>
-        <p className="chat-message__text">{text}</p>
-      </div>
-    </div>
+    <li className="chat-message">
+      <p className="chat-message__meta">
+        <strong className={createur ? 'chat-message__auteur--createur' : ''}>{auteur}</strong>
+        {createur && ' · créateur'} · {heure}
+      </p>
+      <p className="chat-message__texte">{texte}</p>
+    </li>
   );
 }
